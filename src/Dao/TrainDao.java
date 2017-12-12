@@ -1,38 +1,49 @@
 package Dao;
 
+import java.io.*;
 import java.io.IOException;
-import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import Model.Component;
+import Model.Station;
 import Model.Train;
 
-public class TrainDao {
+public class TrainDao  {
 
-	@SuppressWarnings("unchecked")
-	public void addTrain(Train tr) {
-		JSONObject train = new JSONObject();
-		JSONArray allComponents = new JSONArray();
+	File logFile = new File("all_trains");
+	ArrayList<Train> alltrains = new ArrayList<Train>();
 
-		for (Component o : tr.getWagons()) {
-			JSONObject specific_component = new JSONObject();
-
-			specific_component.put("seats", o.getSeats());
-			specific_component.put("id", o.getId());
-			allComponents.add(specific_component);
-		}
 	
-		train.put("Components", allComponents);
-		train.put("name", tr.getName());
-		StringWriter out = new StringWriter();
+	//Call deserializeTrains on initialization program
+	@SuppressWarnings("unchecked")
+	public ArrayList<Train> deserializeTrains() {
+		ArrayList<Train> trains = null;
+	    try {
+	        ObjectInputStream in = new ObjectInputStream(new FileInputStream(logFile));
+	        trains = (ArrayList<Train>) in.readObject(); 
+	        in.close();
+	    }
+	    catch(Exception e) {}
+	    return trains;
+	}
 
+	//Each time a train gets added overwrite logFile
+	public void addTrain (Station station,Train tr) {
+
+		alltrains =  station.getAllTrains();
+		station.addTrainToStation(tr);
+
+		System.out.println(alltrains.size());
+		
 		try {
-			train.writeJSONString(out);
-			System.out.println(out);
-		} catch (IOException e) {
-			e.printStackTrace();
+			
+			FileOutputStream fileOut = new FileOutputStream(logFile);
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(alltrains);
+			out.close();
+			fileOut.close();
+		} catch (IOException i) {
+			i.printStackTrace();
 		}
 
 	}

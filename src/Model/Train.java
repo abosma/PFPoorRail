@@ -1,8 +1,9 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Train {
+public class Train implements Serializable {
 	private String name;
 	private int id;
 	private ArrayList<Component> allWagons = new ArrayList<Component>();
@@ -18,6 +19,11 @@ public class Train {
 	public String getName(){
 		return name;
 	}
+	
+	public int getId(){
+		return id;
+	}
+	
 	
 	public ArrayList<Component> getWagons(){
 		return allWagons;
