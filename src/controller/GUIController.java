@@ -102,13 +102,13 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 				{
 					tfNewTrain = new JTextField(20);
 					jPanel2.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-				}
-					JButton createTrain = CreateButton("Create Train");
+					
+					JButton createTrain = createButton("Create Train");
 					jPanel2.add(createTrain, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 					createTrain.addActionListener(a -> 
 						System.out.println("Test")
 					);
-				{
+					
 					ComboBoxModel cbAllTrainsModel = new DefaultComboBoxModel(new String[] {});
 					JComboBox cbAllTrains = new JComboBox();
 					jPanel2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
@@ -118,10 +118,11 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 					);
 				}
 				{
-					btnDeleteTrain = new JButton();
-					jPanel2.add(btnDeleteTrain, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-					btnDeleteTrain.setText("delete train");
-					btnDeleteTrain.addActionListener(this);
+					JButton deleteTrain = createButton("Delete Train");
+					jPanel2.add(deleteTrain, new GridBagConstraints(2, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+					deleteTrain.addActionListener(a -> 
+						System.out.println("Test")
+					);
 				}
 			}
 			{
@@ -137,15 +138,15 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 				
 				tfCurrentTrain = new JTextField();
 				pnlWagons.add(tfCurrentTrain, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-				tfCurrentTrain.setText("selected: ");
+				tfCurrentTrain.setText("Selected: ");
 				
-				JButton addWagon = CreateButton("Add Wagon");
+				JButton addWagon = createButton("Add Wagon");
 				pnlWagons.add(addWagon, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				addWagon.addActionListener(a -> 
 					System.out.println("Test")
 				);
 				
-				JButton deleteWagon = CreateButton("Delete Wagon");
+				JButton deleteWagon = createButton("Delete Wagon");
 				pnlWagons.add(deleteWagon, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 				deleteWagon.addActionListener(a -> 
 					System.out.println("Test")
@@ -160,7 +161,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 		}
 	}
 	
-	private JButton CreateButton(String txt) {
+	private JButton createButton(String txt) {
 		JButton tempButton = new JButton();
 		tempButton.setText(txt);
 		return tempButton;
