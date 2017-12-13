@@ -3,7 +3,7 @@ package Model;
 import java.io.Serializable;
 import java.util.*;
 
-public class Train implements Serializable, IRoll {
+public class Train implements Serializable, IItem {
 
 	private int id;
 

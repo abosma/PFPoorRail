@@ -15,23 +15,36 @@ public class RichRail {
 	}
 
 
-	public ArrayList<Train> alltrains = new ArrayList<Train>();
+	private ArrayList<IItem> _allItems = new ArrayList<IItem>();
 
-	public ArrayList<Train> getAllTrains() {
-		return alltrains;
+	public ArrayList<IItem> getAllItems() {
+		return _allItems;
 	}
 
-	public void setAllTrainsInit(ArrayList<Train> at) {
-		alltrains = at;
+	public void setAllItems(ArrayList<IItem> at) {
+		_allItems = at;
 	}
 
-	public void addTrainToStation(Train tr) {
-		alltrains.add(tr);
+	public void addItem(IItem it) {
+		_allItems.add(it);
 	}
 	
-	public int getIDlastTrain(){
-		Train e = alltrains.get(alltrains.size() - 1);
-		return e.getId();
+	public void removeItem(IItem it) {
+		_allItems.remove(it);
+	}
+	
+	public IItem getItemByID(int id) {
+		for(IItem a : _allItems){
+			if(a.getId() == id) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
+	public int getLastId(){
+		return(_allItems.get(_allItems.size() - 1).getId());
 	}
 
 }

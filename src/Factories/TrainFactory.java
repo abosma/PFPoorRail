@@ -1,6 +1,6 @@
 package Factories;
 
-import Model.IRoll;
+import Model.IItem;
 import Model.RichRail;
 import Model.Train;
 import Model.Wagon;
@@ -8,14 +8,14 @@ import Model.Wagon;
 public class TrainFactory extends RailwayFactory
 {
     @Override
-    public IRoll createTrain(String name)
+    public IItem createTrain(String name)
     {
-        int id = RichRail.getInstance().getIDlastTrain();
+        int id = RichRail.getInstance().getLastId();
         return new Train(name,id);
     }
 
     @Override
-    public IRoll createWagon(int id, int seats)
+    public IItem createWagon(int id, int seats)
     {
         return new Wagon(seats,id);
     }

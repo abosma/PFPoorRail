@@ -3,6 +3,8 @@ package Actions;
 import Extensions.StringExtension;
 import Factories.RailwayFactory;
 import Factories.TrainFactory;
+import Model.IItem;
+import Model.RichRail;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -60,6 +62,6 @@ public class NewTrainAction implements Action
         if (!StringExtension.stringIsNullOrEmpty(train))
             return;
         RailwayFactory factory = new TrainFactory();
-        factory.createTrain(train);
+        RichRail.getInstance().addItem(factory.createTrain(train));
     }
 }

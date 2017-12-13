@@ -27,8 +27,8 @@ public class TrainDao {
 	// Each time a train gets added overwrite logFile
 	public void addTrain(RichRail ri, Train tr) {
 
-		alltrains = ri.getAllTrains();
-		ri.addTrainToStation(tr);
+		//alltrains = ri.getAllItems();
+		//ri.addItem(it);;
 
 		try {
 

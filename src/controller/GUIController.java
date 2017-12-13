@@ -57,10 +57,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			trainPanel.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
 			Action createAction = new NewTrainAction(tfNewTrain);
-			JButton createTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train",createAction);
-			createTrain.addActionListener(a -> 
-				System.out.println("test")
-			);
+			JButton createTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train", createAction);
 			
 			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
@@ -68,10 +65,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			);
 
 			Action deleteTrainAction = new NewTrainAction(tfNewTrain);
-			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train",deleteTrainAction);
-			deleteTrain.addActionListener(a -> 
-				System.out.println("Test")
-			);
+			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train", deleteTrainAction);
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
 			wagonPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));

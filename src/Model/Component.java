@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 
-public abstract class Component implements Serializable, IRoll {
+public abstract class Component implements Serializable, IItem {
 	private int number_of_seats,id;
 	
 	public Component(int seats, int co_id){
