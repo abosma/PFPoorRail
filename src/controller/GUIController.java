@@ -25,7 +25,6 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 
 	private JPanel jPanel1;
 	private JPanel pnlWagons;
-	private JTextField tfCurrentTrain;
 	private JTextField tfNewTrain;
 	private JPanel jPanel2;
 	private JPanel drawPanel;
@@ -63,26 +62,25 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			getContentPane().add(jPanel2, new GridBagConstraints(0, 2, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			
 			JTextPane tpTextTrain = new JTextPane();
+			tpTextTrain.setText("Train name:");
+			tpTextTrain.setEditable(false);
+			
 			jPanel2.add(tpTextTrain, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			jPanel2.setBounds(10, 10, 100, 15);
 			jPanel2Layout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
 			jPanel2Layout.rowHeights = new int[] {7, 7, 7, 7};
 			jPanel2Layout.columnWeights = new double[] {0.1, 0.1, 0.1, 0.1};
 			jPanel2Layout.columnWidths = new int[] {7, 7, 7, 7};
-			tpTextTrain.setText("train name:");
 			
 			tfNewTrain = new JTextField(20);
 			jPanel2.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			
 			JButton createTrain = createButton(2, 0, 1, 1, jPanel2, "Create Train");
 			createTrain.addActionListener(a -> 
-				System.out.println("Test")
+				System.out.println("test")
 			);
 			
-			ComboBoxModel cbAllTrainsModel = new DefaultComboBoxModel(new String[] {});
-			JComboBox cbAllTrains = new JComboBox();
-			jPanel2.add(cbAllTrains, new GridBagConstraints(1, 1, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-			cbAllTrains.setModel(cbAllTrainsModel);
+			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, jPanel2);
 			cbAllTrains.addActionListener(a -> 
 				System.out.println("Test")
 			);
@@ -102,19 +100,30 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			pnlWagons.setLayout(jPanel3Layout);
 			pnlWagons.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 			
-			tfCurrentTrain = new JTextField();
-			pnlWagons.add(tfCurrentTrain, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
-			tfCurrentTrain.setText("Selected: ");
+			JTextField tfNewWagon = new JTextField(20);
+			pnlWagons.add(tfNewWagon, new GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 			
-			JButton addWagon = createButton(1, 0, 1, 1, pnlWagons,"Add Wagon");
+			JTextPane tfCreateWagon = new JTextPane();
+			pnlWagons.add(tfCreateWagon, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+			tfCreateWagon.setText("Wagon Name: ");
+			tfCreateWagon.setEditable(false);
+			
+			JButton addWagon = createButton(1, 1, 1, 1, pnlWagons,"Add Wagon");
 			addWagon.addActionListener(a -> 
 				System.out.println("Test")
 			);
 			
-			JButton deleteWagon = createButton(1, 1, 1, 1, pnlWagons, "Delete Wagon");
+			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, pnlWagons);
+			cbAllWagons.addActionListener(a -> 
+				System.out.println("Test")
+			);
+			
+			
+			JButton deleteWagon = createButton(1, 3, 1, 1, pnlWagons, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
 				System.out.println("Test")
 			);
+			
 			pack();
 			setSize(800, 600);
 			new HashMap();
@@ -129,6 +138,14 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 		tempButton.setText(txt);
 		panel.add(tempButton, new GridBagConstraints(x, y, width, height, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		return tempButton;
+	}
+	
+	private JComboBox createComboBox(int x, int y, int width, int height, JPanel panel) {
+		ComboBoxModel cbTempModel = new DefaultComboBoxModel(new String[] {});
+		JComboBox cbTempComboBox = new JComboBox();
+		panel.add(cbTempComboBox, new GridBagConstraints(x, y, width, height, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
+		cbTempComboBox.setModel(cbTempModel);
+		return cbTempComboBox;
 	}
 	
 	@Override
