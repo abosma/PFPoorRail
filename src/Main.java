@@ -12,7 +12,7 @@ public class Main
     {
         SwingUtilities.invokeLater(() ->
         {
-            GUIController inst = new GUIController("PoorRail");
+            GUIController inst = new GUIController();
             inst.setLocationRelativeTo(null);
             inst.setVisible(true);
         });
