@@ -4,6 +4,17 @@ import java.util.*;
 
 public class RichRail {
 
+	private static RichRail _instance;
+
+	public static RichRail getInstance()
+	{
+		if(_instance == null)
+			_instance = new RichRail();
+
+		return _instance;
+	}
+
+
 	public ArrayList<Train> alltrains = new ArrayList<Train>();
 
 	public ArrayList<Train> getAllTrains() {
