@@ -15,12 +15,15 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
-public class GUIController extends javax.swing.JFrame implements ActionListener {
-	
+public class GUIController extends javax.swing.JFrame implements ActionListener
+{
+	private DrawController _drawController;
+
 	public GUIController() 
 	{
 		super();
 		initGUI();
+
 	}
 	
 	private void initGUI() 
@@ -43,6 +46,9 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			JPanel drawPanel = new JPanel();
 			drawPanel.setBackground(Color.WHITE);
 			mainPanel.add(drawPanel,BorderLayout.CENTER);
+
+			//Create a new draw controller to draw items
+			_drawController = new DrawController(drawPanel.getGraphics());
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
@@ -97,8 +103,10 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			
 			pack();
 			setSize(800, 600);
-			new HashMap();
-		} catch (Exception e) 
+
+
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}

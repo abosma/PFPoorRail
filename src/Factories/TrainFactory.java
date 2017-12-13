@@ -17,6 +17,6 @@ public class TrainFactory extends RailwayFactory
     @Override
     public IItem createWagon(int id, int seats)
     {
-        return new Wagon(seats,id);
+        return new Wagon();
     }
 }
