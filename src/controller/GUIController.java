@@ -151,7 +151,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			pack();
 			setSize(800, 800);
 			
-			new ObserverController(drawPanel.getGraphics(), cbAllTrains);
+			new ObserverController(drawPanel.getGraphics(), cbAllTrains, cbAllWagons);
 
 		}
 		catch (Exception e)

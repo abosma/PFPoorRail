@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import Model.IItem;
@@ -21,10 +22,15 @@ public class TrainCBObserver extends Observer {
 	public void update() {
         if(RichRail.getInstance().getAllItems() != null) {
         	ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-	        for(IItem item : items)
-	        {
-	            cb.addItem(item.getName());
-	        }
+        	ArrayList<String> namen = new ArrayList<String>();
+        	
+        	
+        	for(IItem i : items) {
+        		namen.add(i.getName());
+        	}
+        	
+        	cb.setModel(new DefaultComboBoxModel(namen.toArray()));
+        	namen.clear();
         }
 	}
 }

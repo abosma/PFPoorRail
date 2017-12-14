@@ -47,7 +47,6 @@ public class TrainDao {
 	// Each time a train gets added overwrite logFile
 	public void serializeItems() {
 		try {
-
 			FileOutputStream fileOut = new FileOutputStream(logFile);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			out.writeObject(RichRail.getInstance().getAllItems());

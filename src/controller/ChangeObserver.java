@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import Model.IItem;
 import Model.RichRail;
+import Model.Train;
 
 public class ChangeObserver extends Observer {
 
@@ -22,7 +23,14 @@ public class ChangeObserver extends Observer {
 			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
 			for(IItem item : items)
 	        {
-	            item.draw(_graphics);
+				if(((Train)item).getWagons().isEmpty()) {
+					item.draw(_graphics);
+				}else {
+					item.draw(_graphics);
+					for(IItem i : ((Train)item).getWagons()) {
+						i.draw(_graphics);
+					}
+				}
 	        }
 		}else{
 			return;

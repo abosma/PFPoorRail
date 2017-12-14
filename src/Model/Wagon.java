@@ -3,7 +3,7 @@ package Model;
 import java.awt.*;
 import java.io.Serializable;
 
-public class Wagon implements Serializable, IComponent
+public class Wagon implements Serializable, IItem
 {
 	private int _id;
 	private int _length;
@@ -15,13 +15,11 @@ public class Wagon implements Serializable, IComponent
 		this._name = name;
 	}
 	
-	@Override
 	public int getSeats()
 	{
 		return 0;
 	}
 
-	@Override
 	public int getLength()
 	{
 		return _length;
@@ -30,7 +28,7 @@ public class Wagon implements Serializable, IComponent
 	@Override
 	public String getName()
 	{
-		return null;
+		return _name;
 	}
 
 	@Override
