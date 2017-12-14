@@ -3,6 +3,7 @@ package controller;
 import Actions.ActionController;
 import Dao.TrainDao;
 import Model.RichRail;
+import Model.Train;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -13,6 +14,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -88,7 +91,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a -> 
-				ac.addWagon(tfNewWagon)
+				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
 			);
 			
 			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
@@ -102,9 +105,51 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 				System.out.println("Test")
 			);
 			
+			JFrame.getFrames()[0].addWindowListener(new WindowListener() {
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowClosing(WindowEvent e) {
+					TrainDao.getInstance().serializeItems();
+				}
+
+				@Override
+				public void windowClosed(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
 			pack();
-			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-			setSize(screenSize.width/2, screenSize.height/2);
+			setSize(800, 800);
 			
 			new ObserverController(drawPanel.getGraphics(), cbAllTrains);
 

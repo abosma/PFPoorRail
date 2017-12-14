@@ -19,12 +19,12 @@ public class TrainCBObserver extends Observer {
 	
 	@Override
 	public void update() {
-		RichRail instance = RichRail.getInstance();
-        ArrayList<IItem> items = instance.getAllItems();
-
-        for(IItem item : items)
-        {
-            cb.addItem(item.getName());
+        if(RichRail.getInstance().getAllItems() != null) {
+        	ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+	        for(IItem item : items)
+	        {
+	            cb.addItem(item.getName());
+	        }
         }
 	}
 }

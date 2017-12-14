@@ -1,8 +1,9 @@
 package Model;
 
 import java.awt.*;
+import java.io.Serializable;
 
-public class Wagon implements IComponent
+public class Wagon implements Serializable, IComponent
 {
 	private int _id;
 	private int _length;

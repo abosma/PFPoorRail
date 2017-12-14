@@ -17,13 +17,15 @@ public class ChangeObserver extends Observer {
 	}
 	
 	@Override
-	public void update() {
-		RichRail instance = RichRail.getInstance();
-        ArrayList<IItem> items = instance.getAllItems();
-
-        for(IItem item : items)
-        {
-            item.draw(_graphics);
-        }
+	public void update() {		
+		if(RichRail.getInstance().getAllItems() != null) {
+			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+			for(IItem item : items)
+	        {
+	            item.draw(_graphics);
+	        }
+		}else{
+			return;
+		}
 	}
 }

@@ -9,14 +9,14 @@ public class Train implements Serializable, IItem {
 
 	private int _id;
 	private String _name;
-	private ArrayList<Wagon> allWagons = new ArrayList<Wagon>();
+	private ArrayList<IItem> allWagons = new ArrayList<IItem>();
 
 	public Train(String name, int id) {
 		this._name = name;
 		this._id = id;
 	}
 
-	public void addWagon(Wagon w) {
+	public void addWagon(IItem w) {
 		allWagons.add(w);
 	}
 
@@ -28,11 +28,11 @@ public class Train implements Serializable, IItem {
 		return _id;
 	}
 
-	public ArrayList<Wagon> getWagons() {
+	public ArrayList<IItem> getWagons() {
 		return allWagons;
 	}
 
-	public void setWagons(ArrayList<Wagon> wag) {
+	public void setWagons(ArrayList<IItem> wag) {
 		allWagons = wag;
 	}
 
@@ -47,6 +47,5 @@ public class Train implements Serializable, IItem {
 		graphics.fillRoundRect(35, 120 + _id * 100, 20, 20, 20, 20);
 		graphics.fillRoundRect(80, 120 + _id * 100, 20, 20, 20, 20);
 		graphics.drawString(_name, 40, 105 + _id * 100);
-
 	}
 }

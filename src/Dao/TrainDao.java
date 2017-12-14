@@ -19,32 +19,38 @@ public class TrainDao {
 		return _instance;
 	}
 
-	File logFile = new File("all_trains");
+	File logFile = new File("all_trains.cooleextensie");
 	ArrayList<IItem> alltrains = new ArrayList<IItem>();
 
 	 // Call deserializeTrains on initialization program
 	@SuppressWarnings("unchecked")
 	public ArrayList<IItem> deserializeTrains() {
 		ArrayList<IItem> trains = null;
-		try {
-			ObjectInputStream in = new ObjectInputStream(new FileInputStream(logFile));
-			trains = (ArrayList<IItem>) in.readObject();
-			in.close();
-		} catch (Exception e) {
+		if(logFile.exists() && logFile.length() != 0) {
+			try {
+				ObjectInputStream in = new ObjectInputStream(new FileInputStream(logFile));
+				trains = (ArrayList<IItem>) in.readObject();
+				in.close();
+			} catch (Exception e) {
+				
+			}
+			if(trains == null) {
+				return new ArrayList<IItem>();
+			}else {
+				return trains;
+			}
+		}else {
+			return new ArrayList<IItem>();
 		}
-		return trains;
 	}
 
 	// Each time a train gets added overwrite logFile
-	public void addTrain(RichRail ri, IItem tr) {
-
-		alltrains.add(tr);
-
+	public void serializeItems() {
 		try {
 
 			FileOutputStream fileOut = new FileOutputStream(logFile);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			out.writeObject(alltrains);
+			out.writeObject(RichRail.getInstance().getAllItems());
 			out.close();
 			fileOut.close();
 		} catch (IOException i) {

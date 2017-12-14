@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.JTextField;
 
+import Dao.TrainDao;
 import Extensions.HasObjectType;
 import Extensions.StringExtension;
 import Factories.RailwayFactory;
 import Factories.TrainFactory;
 import Model.IItem;
 import Model.RichRail;
+import Model.Train;
 
 public class ActionController {
 	
@@ -20,15 +22,21 @@ public class ActionController {
             return;
         RailwayFactory factory = new TrainFactory();
         RichRail.getInstance().addItem(factory.createTrain(train));
+        TrainDao.getInstance().serializeItems();
     }
 	
-	public void addWagon(JTextField _textField) {
+	public void addWagon(JTextField _textField, String selectedTrain) {
 		if(HasObjectType.hasTrain()) {
 			String wagon = _textField.getText();
 	        if (StringExtension.stringIsNullOrEmpty(wagon))
 	            return;
 	        TrainFactory factory = new TrainFactory();
-	        RichRail.getInstance().addItem(factory.createWagon(wagon, 10));
+	        for(IItem i : RichRail.getInstance().getAllItems()) {
+	        	if(i.getName().equals(selectedTrain)) {
+	        		((Train) i).addWagon(factory.createWagon(wagon, 10));
+	        		System.out.println(((Train)i).getWagons().size());
+	        	}
+	        }
 		}else {
 			return;
 		}
