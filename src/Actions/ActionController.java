@@ -22,7 +22,6 @@ public class ActionController {
             return;
         RailwayFactory factory = new TrainFactory();
         RichRail.getInstance().addItem(factory.createTrain(train));
-        TrainDao.getInstance().serializeItems();
     }
 	
 	public void addWagon(JTextField _textField, String selectedTrain) {
@@ -34,7 +33,6 @@ public class ActionController {
 	        for(IItem i : RichRail.getInstance().getAllItems()) {
 	        	if(i.getName().equals(selectedTrain)) {
 	        		((Train) i).addWagon(factory.createWagon(wagon, 10));
-	        		System.out.println(((Train)i).getWagons().size());
 	        	}
 	        }
 		}else {

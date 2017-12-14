@@ -18,6 +18,7 @@ public class Train implements Serializable, IItem {
 
 	public void addWagon(IItem w) {
 		allWagons.add(w);
+		RichRail.getInstance().notifyAllObservers();
 	}
 
 	public String getName() {
@@ -34,6 +35,7 @@ public class Train implements Serializable, IItem {
 
 	public void setWagons(ArrayList<IItem> wag) {
 		allWagons = wag;
+		RichRail.getInstance().notifyAllObservers();
 	}
 
 	@Override
