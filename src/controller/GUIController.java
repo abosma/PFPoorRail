@@ -1,6 +1,6 @@
 package controller;
 
-import Actions.NewTrainAction;
+import Actions.ActionController;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -27,6 +27,8 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 	{
 		try 
 		{
+			ActionController ac = new ActionController();
+			
 			this.setTitle("RichRail");
 			GridBagLayout thisLayout = new GridBagLayout();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -44,8 +46,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			drawPanel.setBackground(Color.WHITE);
 			mainPanel.add(drawPanel,BorderLayout.CENTER);
 
-			//Create a new draw controller to draw items
-			new ObserverController(drawPanel.getGraphics());
+			//Create an observer to draw on RichRail itemlist change
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
@@ -59,16 +60,17 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			JTextField tfNewTrain = new JTextField(20);
 			trainPanel.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-			Action createAction = new NewTrainAction(tfNewTrain);
-			JButton createTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train", createAction);
+			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
+			addTrain.addActionListener(a -> 
+				ac.addTrain(tfNewTrain)
+			);
 			
 			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
 				System.out.println("Test")
 			);
 
-			Action deleteTrainAction = new NewTrainAction(tfNewTrain);
-			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train", deleteTrainAction);
+			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
 			wagonPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
@@ -76,13 +78,12 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			JTextField tfNewWagon = new JTextField(20);
 			wagonPanel.add(tfNewWagon, new GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-			Action addAction = new NewTrainAction(tfNewTrain);
 			JTextPane tfCreateWagon = new JTextPane();
 			wagonPanel.add(tfCreateWagon, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 			tfCreateWagon.setText("Wagon Name: ");
 			tfCreateWagon.setEditable(false);
 			
-			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon", addAction);
+			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a -> 
 				System.out.println("Test")
 			);
@@ -93,14 +94,15 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			);
 			
 			
-			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon", addAction);
+			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
 				System.out.println("Test")
 			);
 			
 			pack();
 			setSize(800, 600);
-
+			
+			new ObserverController(drawPanel.getGraphics(), cbAllTrains);
 
 		}
 		catch (Exception e)
@@ -109,10 +111,9 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		}
 	}
 	
-	private JButton createButton(int x, int y, int width, int height, JPanel panel, String txt, Action action) {
+	private JButton createButton(int x, int y, int width, int height, JPanel panel, String txt) {
 		JButton tempButton = new JButton();
 		tempButton.setText(txt);
-		tempButton.setAction(action);
 		panel.add(tempButton, new GridBagConstraints(x, y, width, height, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		return tempButton;
 	}
