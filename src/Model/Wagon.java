@@ -28,7 +28,7 @@ public class Wagon implements Serializable, IItem
 	@Override
 	public String getName()
 	{
-		return null;
+		return _name;
 	}
 
 	@Override

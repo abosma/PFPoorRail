@@ -10,6 +10,6 @@ public class ObserverController {
 	public ObserverController(Graphics _graphics, JComboBox<String> cbAllTrains, JComboBox<String> cbAllWagons) {
 		new ChangeObserver(RichRail.getInstance(), _graphics);
 		new TrainCBObserver(RichRail.getInstance(), cbAllTrains);
-		new WagonCBObserver(RichRail.getInstance(), cbAllWagons, (String)cbAllTrains.getSelectedItem());
+		new WagonCBObserver(RichRail.getInstance(), cbAllWagons, (String) cbAllTrains.getSelectedItem());
 	}
 }
