@@ -2,6 +2,8 @@ import controller.GUIController;
 
 import javax.swing.*;
 
+import Model.Train;
+
 public class Main
 {
     /**

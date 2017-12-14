@@ -1,32 +1,44 @@
 package controller;
 
-import Actions.NewTrainAction;
+import Actions.ActionController;
+import Dao.TrainDao;
+import Model.RichRail;
+import Model.Train;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
-public class GUIController extends javax.swing.JFrame implements ActionListener {
+public class GUIController extends javax.swing.JFrame implements ActionListener
+{
+	public JComboBox cbAllTrains;
+	public JComboBox cbAllWagons;
 	
 	public GUIController() 
 	{
 		super();
 		initGUI();
+		RichRail.getInstance().setAllItems(TrainDao.getInstance().deserializeTrains());
 	}
 	
 	private void initGUI() 
 	{
 		try 
 		{
+			ActionController ac = new ActionController();
+			
 			this.setTitle("RichRail");
 			GridBagLayout thisLayout = new GridBagLayout();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -41,8 +53,8 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			getContentPane().add(mainPanel, new GridBagConstraints(0, 0, 4, 2, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			
 			JPanel drawPanel = new JPanel();
-			drawPanel.setBackground(Color.WHITE);
-			mainPanel.add(drawPanel,BorderLayout.CENTER);
+//			drawPanel.setBackground(Color.WHITE);
+			mainPanel.add(drawPanel,BorderLayout.LINE_START);
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
@@ -56,16 +68,21 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			JTextField tfNewTrain = new JTextField(20);
 			trainPanel.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-			Action createAction = new NewTrainAction(tfNewTrain);
-			JButton createTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train", createAction);
+			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
+			addTrain.addActionListener(a -> 
+				ac.addTrain(tfNewTrain)
+			);
 			
-			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
+			
+			cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 
-			Action deleteTrainAction = new NewTrainAction(tfNewTrain);
-			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train", deleteTrainAction);
+			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
+			deleteTrain.addActionListener(a -> 
+				ac.removeTrain((String) cbAllTrains.getSelectedItem())
+			);
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
 			wagonPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
@@ -73,41 +90,85 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 			JTextField tfNewWagon = new JTextField(20);
 			wagonPanel.add(tfNewWagon, new GridBagConstraints(1, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
-			Action addAction = new NewTrainAction(tfNewTrain);
 			JTextPane tfCreateWagon = new JTextPane();
 			wagonPanel.add(tfCreateWagon, new GridBagConstraints(0, 0, 1, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 			tfCreateWagon.setText("Wagon Name: ");
 			tfCreateWagon.setEditable(false);
 			
-			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon", addAction);
+			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a -> 
-				System.out.println("Test")
+				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
 			);
 			
-			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
+			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
 			cbAllWagons.addActionListener(a -> 
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 			
 			
-			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon", addAction);
+			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
-				System.out.println("Test")
+				ac.removeWagon((String)cbAllTrains.getSelectedItem(), (String)cbAllWagons.getSelectedItem())
 			);
 			
+			JFrame.getFrames()[0].addWindowListener(new WindowListener() {
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowClosing(WindowEvent e) {
+					TrainDao.getInstance().serializeItems();
+				}
+
+				@Override
+				public void windowClosed(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+
 			pack();
-			setSize(800, 600);
-			new HashMap();
-		} catch (Exception e) 
+			setSize(800, 800);
+			
+			new ObserverController(drawPanel, cbAllTrains, cbAllWagons);
+
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
 	}
 	
-	private JButton createButton(int x, int y, int width, int height, JPanel panel, String txt, Action action) {
+	private JButton createButton(int x, int y, int width, int height, JPanel panel, String txt) {
 		JButton tempButton = new JButton();
 		tempButton.setText(txt);
-		tempButton.setAction(action);
 		panel.add(tempButton, new GridBagConstraints(x, y, width, height, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 		return tempButton;
 	}
