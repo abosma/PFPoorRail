@@ -1,10 +1,7 @@
 package Actions;
 
-import java.util.ArrayList;
-
 import javax.swing.JTextField;
 
-import Dao.TrainDao;
 import Extensions.HasObjectType;
 import Extensions.StringExtension;
 import Factories.RailwayFactory;
@@ -21,22 +18,39 @@ public class ActionController {
         if (StringExtension.stringIsNullOrEmpty(train))
             return;
         RailwayFactory factory = new TrainFactory();
-        RichRail.getInstance().addItem(factory.createTrain(train));
+        IItem t = factory.createTrain(train);
+        RichRail.getInstance().addItem(t);
     }
 	
 	public void addWagon(JTextField _textField, String selectedTrain) {
-		if(HasObjectType.hasTrain()) {
-			String wagon = _textField.getText();
-	        if (StringExtension.stringIsNullOrEmpty(wagon))
-	            return;
-	        TrainFactory factory = new TrainFactory();
-	        for(IItem i : RichRail.getInstance().getAllItems()) {
-	        	if(i.getName().equals(selectedTrain)) {
-	        		((Train) i).addWagon(factory.createWagon(wagon, 10));
-	        	}
-	        }
-		}else {
-			return;
+		String wagon = _textField.getText();
+        if (StringExtension.stringIsNullOrEmpty(wagon))
+            return;
+        TrainFactory factory = new TrainFactory();
+        for(IItem i : RichRail.getInstance().getAllItems()) {
+        	if(i.getName().equals(selectedTrain)) {
+        		((Train) i).addWagon(factory.createWagon(wagon, 10));
+        	}
+        }
+	}
+	
+	public void removeWagon(String selectedTrain, String selectedWagon) {
+		for(IItem i : RichRail.getInstance().getAllItems()) {
+        	if(i.getName().equals(selectedTrain)) {
+        		for(IItem wagon : ((Train) i).getWagons()) {
+        			((Train) i).removeWagon(wagon);
+        		}
+        	}
 		}
 	}
+	
+	public void removeTrain(String selectedTrain) {
+		for(IItem i : RichRail.getInstance().getAllItems()) {
+        	if(i.getName().equals(selectedTrain)) {
+        		RichRail.getInstance().removeItem(i);
+        		return;
+        	}
+		}
+	}
+	
 }

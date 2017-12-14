@@ -11,14 +11,14 @@ import Model.Train;
 
 public class WagonCBObserver extends Observer {
 
-	private JComboBox<String> cb;
-	private String name;
+	private JComboBox<String> cbt;
+	private JComboBox<String> cbw;
 	
-	public WagonCBObserver(RichRail rr, JComboBox<String> cb, String name) {
+	public WagonCBObserver(RichRail rr, JComboBox<String> cbt, JComboBox<String> cbw) {
 		this.rr = rr;
 		this.rr.attach(this);
-		this.cb = cb;
-		this.name = name;
+		this.cbt = cbt;
+		this.cbw = cbw;
 	}
 	
 	@Override
@@ -27,21 +27,22 @@ public class WagonCBObserver extends Observer {
         	ArrayList<IItem> items = RichRail.getInstance().getAllItems();
         	ArrayList<String> wagonNamen = new ArrayList<String>();
         	
-        	if(name == null) {
-        		name = RichRail.getInstance().getAllItems().get(0).getName();
-        		System.out.println(name);
-        	}
+        	String selectedTrain = (String) cbt.getSelectedItem();
         	
-        	for(IItem i : items) {
-        		if(i.getName().equals(name)) {
-        			for(IItem w : ((Train)i).getWagons()) {
-            			wagonNamen.add(w.getName());
-            		}
+        	if(selectedTrain != null) {
+        		for(IItem i : items) {
+        			if(i.getName().equals(selectedTrain)) {
+        				for(IItem w : ((Train) i).getWagons()) {
+        	    			wagonNamen.add(w.getName());
+        	    		}
+        			}
         		}
+        		
+	        	cbw.setModel(new DefaultComboBoxModel(wagonNamen.toArray()));
+	        	wagonNamen.clear();
+        	}else {
+        		cbw.setModel(new DefaultComboBoxModel(new String[] {}));
         	}
-        	
-        	cb.setModel(new DefaultComboBoxModel(wagonNamen.toArray()));
-        	wagonNamen.clear();
         }
 	}
 }

@@ -43,6 +43,11 @@ public class Train implements Serializable, IItem {
 		allWagons = wag;
 		RichRail.getInstance().notifyAllObservers();
 	}
+	
+	public void removeWagon(IItem wag) {
+		allWagons.remove(wag);
+		RichRail.getInstance().notifyAllObservers();
+	}
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -52,7 +57,7 @@ public class Train implements Serializable, IItem {
 	
 		try {
 			
-		    img = ImageIO.read(new File("C:\\Users\\ronald\\git\\PFPoorRail\\src\\images\\train.png"));
+		    img = ImageIO.read(new File("src/images/train.png"));
 		    System.out.println(img.getWidth());
 		} catch (IOException e) {
 			e.printStackTrace();

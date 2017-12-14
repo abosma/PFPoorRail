@@ -23,6 +23,9 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener
 {
+	public JComboBox cbAllTrains;
+	public JComboBox cbAllWagons;
+	
 	public GUIController() 
 	{
 		super();
@@ -71,12 +74,15 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			);
 			
 			
-			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
+			cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
 				System.out.println("Test")
 			);
 
 			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
+			deleteTrain.addActionListener(a -> 
+				ac.removeTrain((String) cbAllTrains.getSelectedItem())
+			);
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
 			wagonPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
@@ -94,7 +100,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
 			);
 			
-			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
+			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
 			cbAllWagons.addActionListener(a -> 
 				System.out.println("Test")
 			);
@@ -102,7 +108,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
-				System.out.println("Test")
+				ac.removeWagon((String)cbAllTrains.getSelectedItem(), (String)cbAllWagons.getSelectedItem())
 			);
 			
 			JFrame.getFrames()[0].addWindowListener(new WindowListener() {

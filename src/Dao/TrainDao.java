@@ -34,7 +34,7 @@ public class TrainDao {
 			} catch (Exception e) {
 				
 			}
-			if(trains == null) {
+			if(trains == null || trains.isEmpty()) {
 				return new ArrayList<IItem>();
 			}else {
 				return trains;

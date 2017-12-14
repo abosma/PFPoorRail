@@ -17,6 +17,7 @@ public class RichRail
 
 	private ArrayList<IItem> _allItems = new ArrayList<IItem>();
 	private List<Observer> observers = new ArrayList<Observer>();
+	private IItem selectedTrain;
 
 	public ArrayList<IItem> getAllItems()
 	{
