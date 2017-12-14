@@ -76,7 +76,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 
 			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
@@ -102,7 +102,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
 			cbAllWagons.addActionListener(a -> 
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 			
 			

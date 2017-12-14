@@ -1,5 +1,9 @@
 package Actions;
 
+import java.util.ArrayList;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import Extensions.HasObjectType;
@@ -39,6 +43,7 @@ public class ActionController {
         	if(i.getName().equals(selectedTrain)) {
         		for(IItem wagon : ((Train) i).getWagons()) {
         			((Train) i).removeWagon(wagon);
+        			return;
         		}
         	}
 		}
@@ -51,6 +56,23 @@ public class ActionController {
         		return;
         	}
 		}
+	}
+	
+	public void updateComboBoxes(JComboBox cbAllTrains, JComboBox cbAllWagons) {
+		
+		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		ArrayList<String> wagonNames = new ArrayList<String>();
+		
+		for(IItem item : items)
+        {
+			if(item.getName().equals(cbAllTrains.getSelectedItem())) {
+				for(IItem i : ((Train) item).getWagons()) {
+					wagonNames.add(i.getName());
+				}
+				
+				cbAllWagons.setModel(new DefaultComboBoxModel(wagonNames.toArray()));
+	        }
+        }
 	}
 	
 }
