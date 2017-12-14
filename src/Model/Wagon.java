@@ -43,14 +43,11 @@ public class Wagon implements Serializable, IItem
 		return _id;
 	}
 
-	public BufferedImage getImage()
-	{
-		try
-		{
+
+	public BufferedImage getImage(){
+	    try {
 			img = ImageIO.read(new File("src/images/wagon.png"));
-		}
-		catch (IOException e)
-		{
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

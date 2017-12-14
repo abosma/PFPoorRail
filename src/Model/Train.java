@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 public class Train implements Serializable, IItem {
 
@@ -18,6 +17,7 @@ public class Train implements Serializable, IItem {
 	private String _name;
 	private ArrayList<IItem> allWagons = new ArrayList<IItem>();
 	private transient BufferedImage img;
+
 	public Train(String name, int id) {
 		this._name = name;
 		this._id = id;
@@ -44,27 +44,19 @@ public class Train implements Serializable, IItem {
 		allWagons = wag;
 		RichRail.getInstance().notifyAllObservers();
 	}
-	
+
 	public void removeWagon(IItem wag) {
 		allWagons.remove(wag);
 		RichRail.getInstance().notifyAllObservers();
 	}
 
-
-	public BufferedImage getImage(){
-	    try {
+	public BufferedImage getImage() {
+		try {
 			img = ImageIO.read(new File("src/images/train.png"));
-	    }
-		 catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return img;
-	    }
 	}
-	    
-	
-	
-			
-		
-	
+}

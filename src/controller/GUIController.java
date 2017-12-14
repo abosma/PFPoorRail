@@ -24,6 +24,9 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener
 {
+	public JComboBox cbAllTrains;
+	public JComboBox cbAllWagons;
+
 	public GUIController()
 	{
 		super();
@@ -48,21 +51,15 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JPanel mainPanel = new JPanel();
 			mainPanel.setLayout(new BorderLayout());
-			getContentPane().add(mainPanel, new GridBagConstraints(0, 0, 4, 2, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+			getContentPane().add(mainPanel, new GridBagConstraints(0, 0, 4, 2, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
 			JPanel drawPanel = new JPanel();
 			drawPanel.setBackground(Color.WHITE);
-			mainPanel.add(drawPanel, BorderLayout.CENTER);
-
+			mainPanel.add(drawPanel,BorderLayout.CENTER);
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
-			trainPanel.setBackground(Color.BLACK);
-
-
 
 			JTextPane tpTextTrain = new JTextPane();
-
-
 			tpTextTrain.setText("Train name:");
 			tpTextTrain.setEditable(false);
 			trainPanel.add(tpTextTrain, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
@@ -74,19 +71,21 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
 			addTrain.addActionListener(a ->
-				ac.addTrain(tfNewTrain.getText())
+				ac.addTrain(tfNewTrain)
 			);
 
 
-			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
+			cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a ->
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 
 			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
+			deleteTrain.addActionListener(a ->
+				ac.removeTrain((String) cbAllTrains.getSelectedItem())
+			);
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
-			wagonPanel.setBackground(Color.RED);
 			wagonPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 
 			JTextField tfNewWagon = new JTextField(20);
@@ -99,18 +98,18 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a ->
-				ac.addWagon(tfNewWagon.getText(), (String)cbAllTrains.getSelectedItem())
+				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
 			);
 
-			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
+			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
 			cbAllWagons.addActionListener(a ->
-				System.out.println("Test")
+				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
 			);
 
 
 			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a ->
-				System.out.println("Test")
+				ac.removeWagon((String)cbAllTrains.getSelectedItem(), (String)cbAllWagons.getSelectedItem())
 			);
 
 			JFrame.getFrames()[0].addWindowListener(new WindowListener() {
@@ -200,6 +199,4 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		// TODO Auto-generated method stub
 
 	}
-
 }
-
