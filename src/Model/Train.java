@@ -53,7 +53,7 @@ public class Train implements Serializable, IItem {
 
 	public BufferedImage getImage(){
 	    try {
-			img = ImageIO.read(new File("C:\\Users\\ronald\\git\\PFPoorRail\\src\\images\\train.png"));
+			img = ImageIO.read(new File("src/images/train.png"));
 	    }
 		 catch (IOException e) {
 			// TODO Auto-generated catch block
