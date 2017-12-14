@@ -1,7 +1,15 @@
 package controller;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 
 import Model.IItem;
 import Model.RichRail;
@@ -9,30 +17,34 @@ import Model.Train;
 
 public class ChangeObserver extends Observer {
 
-	private Graphics _graphics;
-	
-	public ChangeObserver(RichRail rr, Graphics _graphics) {
+	// private Graphics _graphics;
+	private JPanel drawPanel;
+
+	public ChangeObserver(RichRail rr, JPanel panel) {
 		this.rr = rr;
 		this.rr.attach(this);
-		this._graphics = _graphics;
+		this.drawPanel = panel;
 	}
-	
+
 	@Override
-	public void update() {		
-		if(RichRail.getInstance().getAllItems() != null) {
+	public void update() {
+		drawPanel.removeAll();
+		if (RichRail.getInstance().getAllItems() != null) {
 			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-			for(IItem item : items)
-	        {
-				if(((Train)item).getWagons().isEmpty()) {
-					item.draw(_graphics);
-				}else {
-					item.draw(_graphics);
-					for(IItem i : ((Train)item).getWagons()) {
-						i.draw(_graphics);
+			for (IItem item : items) {
+				System.out.println(item.getName());
+				JLabel labeltrainimage = new JLabel(new ImageIcon(item.getImage()));
+				drawPanel.add(labeltrainimage);
+
+				if (((Train) item).getWagons().isEmpty()) {
+				} else {
+					for (IItem i : ((Train) item).getWagons()) {
+						JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+						drawPanel.add(labelwagonimage);
 					}
 				}
-	        }
-		}else{
+			}
+		} else {
 			return;
 		}
 	}

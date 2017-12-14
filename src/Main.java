@@ -2,6 +2,8 @@ import controller.GUIController;
 
 import javax.swing.*;
 
+import Model.Train;
+
 public class Main
 {
     /**
@@ -15,6 +17,9 @@ public class Main
             GUIController inst = new GUIController();
             inst.setLocationRelativeTo(null);
             inst.setVisible(true);
+            
+            
+            
         });
     }
 }

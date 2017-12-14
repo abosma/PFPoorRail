@@ -1,13 +1,19 @@
 package Model;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.imageio.ImageIO;
 
 public class Wagon implements Serializable, IItem
 {
 	private int _id;
 	private int _length;
 	private String _name;
+	private transient BufferedImage img;
 
 	public Wagon(String name, int seats, int id) {
 		this._id = id;
@@ -37,14 +43,15 @@ public class Wagon implements Serializable, IItem
 		return _id;
 	}
 
-	@Override
-	public void draw(Graphics graphics)
-	{
-		graphics.setColor(Color.LIGHT_GRAY);
-		graphics.fillRect(30+_id*_length,80+_id*100,80,40);
-		graphics.setColor(Color.BLACK);
-		graphics.fillRoundRect(35+(_id -1 )*_length, 120+_id*100, 20, 20, 20, 20);
-		graphics.fillRoundRect(80+(_id -1 )*_length, 120+_id*100, 20, 20, 20, 20);
-		graphics.drawString(_name,40+(_id -1 )*_length,105+_id*100);
+	public BufferedImage getImage(){
+	    try {
+			img = ImageIO.read(new File("C:\\Users\\ronald\\git\\PFPoorRail\\src\\images\\wagon.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return img;
 	}
+	
+	
 }
