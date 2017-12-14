@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.*;
+import controller.Observer;
 
 public class RichRail
 {
@@ -15,6 +16,7 @@ public class RichRail
 	}
 
 	private ArrayList<IItem> _allItems = new ArrayList<IItem>();
+	private List<Observer> observers = new ArrayList<Observer>();
 
 	public ArrayList<IItem> getAllItems()
 	{
@@ -24,16 +26,19 @@ public class RichRail
 	public void setAllItems(ArrayList<IItem> at)
 	{
 		_allItems = at;
+		notifyAllObservers();
 	}
 
 	public void addItem(IItem it)
 	{
 		_allItems.add(it);
+		notifyAllObservers();
 	}
 
 	public void removeItem(IItem it)
 	{
 		_allItems.remove(it);
+		notifyAllObservers();
 	}
 
 	public IItem getItemByID(int id)
@@ -52,5 +57,15 @@ public class RichRail
 	public int getLastId()
 	{
 		return (_allItems.get(_allItems.size() - 1).getId());
+	}
+	
+	public void attach(Observer observer) {
+		observers.add(observer);
+	}
+	
+	public void notifyAllObservers() {
+		for(Observer o : observers) {
+			o.update();
+		}
 	}
 }

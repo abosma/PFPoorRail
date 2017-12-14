@@ -2,6 +2,8 @@ package controller;
 
 import Model.IItem;
 import Model.RichRail;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ public class DrawController
 
     public void draw()
     {
-        RichRail instance = RichRail.getInstance();
+    	RichRail instance = RichRail.getInstance();
         ArrayList<IItem> items = instance.getAllItems();
 
         for(IItem item : items)

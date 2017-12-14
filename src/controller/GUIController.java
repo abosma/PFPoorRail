@@ -17,13 +17,10 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener
 {
-	private DrawController _drawController;
-
 	public GUIController() 
 	{
 		super();
 		initGUI();
-
 	}
 	
 	private void initGUI() 
@@ -48,7 +45,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			mainPanel.add(drawPanel,BorderLayout.CENTER);
 
 			//Create a new draw controller to draw items
-			_drawController = new DrawController(drawPanel.getGraphics());
+			new ObserverController(drawPanel.getGraphics());
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
