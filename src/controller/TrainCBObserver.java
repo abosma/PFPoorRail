@@ -1,19 +1,20 @@
 package controller;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
+
+import javax.swing.JComboBox;
 
 import Model.IItem;
 import Model.RichRail;
 
-public class ChangeObserver extends Observer {
+public class TrainCBObserver extends Observer {
 
-	private Graphics _graphics;
+	private JComboBox<String> cb;
 	
-	public ChangeObserver(RichRail rr, Graphics _graphics) {
+	public TrainCBObserver(RichRail rr, JComboBox<String> cb) {
 		this.rr = rr;
 		this.rr.attach(this);
-		this._graphics = _graphics;
+		this.cb = cb;
 	}
 	
 	@Override
@@ -23,7 +24,7 @@ public class ChangeObserver extends Observer {
 
         for(IItem item : items)
         {
-            item.draw(_graphics);
+            cb.addItem(item.getName());
         }
 	}
 }

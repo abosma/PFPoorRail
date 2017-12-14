@@ -15,8 +15,9 @@ public class TrainFactory extends RailwayFactory
     }
 
     @Override
-    public IItem createWagon(int id, int seats)
+    public IItem createWagon(String name, int seats)
     {
-        return new Wagon();
+    	int id = RichRail.getInstance().getLastId();
+        return new Wagon(name, seats, id);
     }
 }

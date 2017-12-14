@@ -1,6 +1,8 @@
 package controller;
 
 import Actions.ActionController;
+import Dao.TrainDao;
+import Model.RichRail;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -9,7 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -21,6 +22,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 	{
 		super();
 		initGUI();
+		RichRail.getInstance().setAllItems(TrainDao.getInstance().deserializeTrains());
 	}
 	
 	private void initGUI() 
@@ -65,6 +67,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 				ac.addTrain(tfNewTrain)
 			);
 			
+			
 			JComboBox cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
 			cbAllTrains.addActionListener(a -> 
 				System.out.println("Test")
@@ -85,7 +88,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a -> 
-				System.out.println("Test")
+				ac.addWagon(tfNewWagon)
 			);
 			
 			JComboBox cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);

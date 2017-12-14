@@ -4,31 +4,41 @@ import java.io.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import Model.IItem;
 import Model.RichRail;
 import Model.Train;
 
 public class TrainDao {
 
-	File logFile = new File("all_trains");
-	ArrayList<Train> alltrains = new ArrayList<Train>();
+	private static TrainDao _instance;
 
-	// Call deserializeTrains on initialization program
+	public static TrainDao getInstance() {
+		if (_instance == null)
+			_instance = new TrainDao();
+
+		return _instance;
+	}
+
+	File logFile = new File("all_trains");
+	ArrayList<IItem> alltrains = new ArrayList<IItem>();
+
+	 // Call deserializeTrains on initialization program
 	@SuppressWarnings("unchecked")
-	public ArrayList<Train> deserializeTrains() {
-		ArrayList<Train> trains = null;
+	public ArrayList<IItem> deserializeTrains() {
+		ArrayList<IItem> trains = null;
 		try {
 			ObjectInputStream in = new ObjectInputStream(new FileInputStream(logFile));
-			trains = (ArrayList<Train>) in.readObject();
+			trains = (ArrayList<IItem>) in.readObject();
 			in.close();
 		} catch (Exception e) {
 		}
 		return trains;
 	}
-	// Each time a train gets added overwrite logFile
-	public void addTrain(RichRail ri, Train tr) {
 
-		//alltrains = ri.getAllItems();
-		//ri.addItem(it);;
+	// Each time a train gets added overwrite logFile
+	public void addTrain(RichRail ri, IItem tr) {
+
+		alltrains.add(tr);
 
 		try {
 
@@ -58,7 +68,5 @@ public class TrainDao {
 		} catch (Exception e) {
 			return 0;
 		}
-
 	}
-
 }

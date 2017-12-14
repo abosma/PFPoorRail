@@ -1,7 +1,5 @@
 package Model;
 
-import data.ComponentTypes;
-
 import java.awt.*;
 
 public interface IItem

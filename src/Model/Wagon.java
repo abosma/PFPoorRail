@@ -8,6 +8,12 @@ public class Wagon implements IComponent
 	private int _length;
 	private String _name;
 
+	public Wagon(String name, int seats, int id) {
+		this._id = id;
+		this._length = seats;
+		this._name = name;
+	}
+	
 	@Override
 	public int getSeats()
 	{
