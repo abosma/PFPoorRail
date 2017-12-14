@@ -6,9 +6,11 @@ import Model.RichRail;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -47,8 +49,6 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			JPanel drawPanel = new JPanel();
 			drawPanel.setBackground(Color.WHITE);
 			mainPanel.add(drawPanel,BorderLayout.CENTER);
-
-			//Create an observer to draw on RichRail itemlist change
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
@@ -103,7 +103,8 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			);
 			
 			pack();
-			setSize(800, 600);
+			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			setSize(screenSize.width/2, screenSize.height/2);
 			
 			new ObserverController(drawPanel.getGraphics(), cbAllTrains);
 
