@@ -53,15 +53,18 @@ public class CliParser
 
     private void New(String[] values)
     {
-        if(values.length < 2)
-            return;
-
         switch (values[0])
         {
             case "train":
-                _action.addTrain(values[0]);
+                if(values.length < 2)
+                    return;
+
+                _action.addTrain(values[1]);
                 break;
             case "wagon":
+                if(values.length < 3)
+                    return;
+
                 if(!IntExtensions.IsInt(values[2]))
                     return;
 
@@ -117,9 +120,9 @@ public class CliParser
         if(values.length < 2)
             return;
 
-        if(!IntExtensions.IsInt(values[1]))
-            return;
+        String wagon = values[0];
+        String train = values[2];
 
-        _action.addWagon(values[0],Integer.parseInt(values[1]));
+        _action.AssignWagonToTrain(train,wagon);
     }
 }

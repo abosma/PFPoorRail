@@ -13,6 +13,7 @@ import Factories.TrainFactory;
 import Model.IItem;
 import Model.RichRail;
 import Model.Train;
+import Model.Wagon;
 
 public class ActionController
 {
@@ -122,5 +123,34 @@ public class ActionController
 			return item;
 		}
 		return null;
+	}
+
+	public void AssignWagonToTrain(String train, String wagon)
+	{
+		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		Train trainItem = null;
+		for (IItem item : items)
+		{
+			if (!item.getName().equals(train))
+				continue;
+
+			if (!(item instanceof Train))
+				continue;
+			trainItem = (Train) item;
+			break;
+		}
+		if (trainItem == null)
+			return;
+
+		for (IItem item : items)
+		{
+			if (!item.getName().equals(wagon))
+				continue;
+
+			if (!(item instanceof Wagon))
+				continue;
+
+			trainItem.addWagon(item);
+		}
 	}
 }

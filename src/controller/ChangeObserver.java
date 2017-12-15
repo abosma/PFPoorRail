@@ -61,9 +61,9 @@ public class ChangeObserver extends Observer
 				else
 				{
 
-					JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+					JLabel wagonImage = new JLabel(new ImageIcon(i.getImage()));
 
-					drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+					drawPanel.add(wagonImage, BorderLayout.LINE_END);
 				}
 			}
 		}
