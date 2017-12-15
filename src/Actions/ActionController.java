@@ -24,6 +24,14 @@ public class ActionController
 			return;
 		RailwayFactory factory = new TrainFactory();
 		IItem t = factory.createTrain(train);
+		
+		for(IItem i : RichRail.getInstance().getAllItems()) {
+			if(i.getName().equals(train)) {
+				System.out.println("Trein bestaat al");
+				return;
+			}
+		}
+		
 		RichRail.getInstance().addItem(t);
 	}
 
@@ -46,6 +54,7 @@ public class ActionController
 			if (i.getName().equals(selectedTrain))
 			{
 				((Train) i).addWagon(factory.createWagon(wagon, 10));
+				return;
 			}
 		}
 	}
