@@ -35,14 +35,13 @@ public class ChangeObserver extends Observer
 		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
 		for (IItem item : items)
 		{
-			JLabel labeltrainimage = new JLabel(new ImageIcon(item.getImage()));
+			JLabel trainImage = new JLabel(new ImageIcon(item.getImage()));
 
-			Label labelButtonPressHeading, labelButtonPressed;
-			labelButtonPressHeading = new Label();
+			Label labelButtonPressHeading = new Label();
 			labelButtonPressHeading.setText(item.getName());
 
 			drawPanel.add(labelButtonPressHeading, BorderLayout.LINE_START);
-			drawPanel.add(labeltrainimage);
+			drawPanel.add(trainImage);
 
 			if(!(item instanceof  Train))
 				continue;
@@ -54,9 +53,9 @@ public class ChangeObserver extends Observer
 			{
 				if (index++ == ((Train) item).getWagons().size() - 1)
 				{
-					JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+					JLabel wagonImage = new JLabel(new ImageIcon(i.getImage()));
 
-					drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+					drawPanel.add(wagonImage, BorderLayout.LINE_END);
 					drawPanel.add(Box.createRigidArea(new Dimension(75, 0)));
 				}
 				else
