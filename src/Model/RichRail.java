@@ -46,7 +46,7 @@ public class RichRail
 		for (IItem a : _allItems)
 		{
 			if (a.getId() != id)
-				continue;
+		 		continue;
 
 			return a;
 		}
@@ -56,25 +56,19 @@ public class RichRail
 
 	public int getLastId()
 	{
-		if (!_allItems.isEmpty())
-		{
+		if(!_allItems.isEmpty()) {
 			return (_allItems.get(_allItems.size() - 1).getId());
-		}
-		else
-		{
+		}else {
 			return 0;
 		}
 	}
-
-	public void attach(Observer observer)
-	{
+	
+	public void attach(Observer observer) {
 		observers.add(observer);
 	}
-
-	public void notifyAllObservers()
-	{
-		for (Observer o : observers)
-		{
+	
+	public void notifyAllObservers() {
+		for(Observer o : observers) {
 			o.update();
 		}
 	}

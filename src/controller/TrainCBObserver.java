@@ -8,34 +8,29 @@ import javax.swing.JComboBox;
 import Model.IItem;
 import Model.RichRail;
 
-public class TrainCBObserver extends Observer
-{
+public class TrainCBObserver extends Observer {
 
-	private String[] cb;
-
-	public TrainCBObserver(RichRail rr, String[] cb)
-	{
+	private JComboBox<String> cb;
+	
+	public TrainCBObserver(RichRail rr, JComboBox<String> cb) {
 		this.rr = rr;
 		this.rr.attach(this);
 		this.cb = cb;
 	}
-
+	
 	@Override
-	public void update()
-	{
-		if (RichRail.getInstance().getAllItems() != null)
-		{
-			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-			ArrayList<String> namen = new ArrayList<String>();
-
-
-			for (IItem i : items)
-			{
-				namen.add(i.getName());
-			}
-
-			cb.setModel(new DefaultComboBoxModel(namen.toArray()));
-			namen.clear();
-		}
+	public void update() {
+        if(RichRail.getInstance().getAllItems() != null) {
+        	ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+        	ArrayList<String> namen = new ArrayList<String>();
+        	
+        	
+        	for(IItem i : items) {
+        		namen.add(i.getName());
+        	}
+        	
+        	cb.setModel(new DefaultComboBoxModel(namen.toArray()));
+        	namen.clear();
+        }
 	}
 }

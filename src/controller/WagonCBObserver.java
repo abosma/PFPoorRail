@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import Model.ObserverValues;
+
 import Model.IItem;
 import Model.RichRail;
 import Model.Train;
 
-public class WagonCBObserver extends Observer
-{
+public class WagonCBObserver extends Observer {
 
 	private JComboBox<String> cbt;
 	private JComboBox<String> cbw;
@@ -21,7 +20,7 @@ public class WagonCBObserver extends Observer
 		this.cbt = cbt;
 		this.cbw = cbw;
 	}
-
+	
 	@Override
 	public void update() {
         if(RichRail.getInstance().getAllItems() != null) {
