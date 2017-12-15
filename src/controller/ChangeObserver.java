@@ -43,6 +43,10 @@ public class ChangeObserver extends Observer
 
 			drawPanel.add(labelButtonPressHeading, BorderLayout.LINE_START);
 			drawPanel.add(labeltrainimage);
+
+			if(!(item instanceof  Train))
+				continue;
+
 			if (((Train) item).getWagons().isEmpty())
 				continue;
 			int index = 0;
