@@ -54,7 +54,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JPanel drawPanel = new JPanel();
 //			drawPanel.setBackground(Color.WHITE);
-			mainPanel.add(drawPanel,BorderLayout.LINE_START);
+			mainPanel.add(drawPanel,BorderLayout.CENTER);
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
