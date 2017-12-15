@@ -70,7 +70,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
 			addTrain.addActionListener(a -> 
-				ac.addTrain(tfNewTrain)
+				ac.addTrain(tfNewTrain.getText())
 			);
 			
 			
