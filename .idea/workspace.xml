@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3055e7c9-0024-4d49-ada0-8fd2a0fc9c1e" name="Default" comment="dingen">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/all_trains.cooleextensie" afterPath="$PROJECT_DIR$/all_trains.cooleextensie" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Actions/ActionController.java" afterPath="$PROJECT_DIR$/src/Actions/ActionController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cli/CliMain.java" afterPath="$PROJECT_DIR$/src/Cli/CliMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cli/CliPanel.java" afterPath="$PROJECT_DIR$/src/Cli/CliPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cli/Logic/CliParser.java" afterPath="$PROJECT_DIR$/src/Cli/Logic/CliParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Extensions/StringExtension.java" afterPath="$PROJECT_DIR$/src/Extensions/StringExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/ObserverValues.java" afterPath="$PROJECT_DIR$/src/Model/ObserverValues.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Wagon.java" afterPath="$PROJECT_DIR$/src/Model/Wagon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/ChangeObserver.java" afterPath="$PROJECT_DIR$/src/controller/ChangeObserver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/GUIController.java" afterPath="$PROJECT_DIR$/src/controller/GUIController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/Observer.java" afterPath="$PROJECT_DIR$/src/controller/Observer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/ObserverController.java" afterPath="$PROJECT_DIR$/src/controller/ObserverController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/TrainCBObserver.java" afterPath="$PROJECT_DIR$/src/controller/TrainCBObserver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/WagonCBObserver.java" afterPath="$PROJECT_DIR$/src/controller/WagonCBObserver.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -60,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CliParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CliParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Cli/Logic/CliParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="937">
-              <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="687">
+              <caret line="108" column="44" lean-forward="true" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -72,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChangeObserver.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ChangeObserver.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/ChangeObserver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="492">
-              <caret line="41" column="36" lean-forward="true" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
+            <state relative-caret-position="964">
+              <caret line="67" column="1" lean-forward="false" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -224,11 +210,11 @@
         <option value="$PROJECT_DIR$/src/controller/WagonCBObserver.java" />
         <option value="$PROJECT_DIR$/src/Cli/CliMain.java" />
         <option value="$PROJECT_DIR$/src/Cli/CliPanel.java" />
-        <option value="$PROJECT_DIR$/src/controller/ChangeObserver.java" />
         <option value="$PROJECT_DIR$/src/Extensions/StringExtension.java" />
         <option value="$PROJECT_DIR$/src/Actions/ActionController.java" />
         <option value="$PROJECT_DIR$/src/Cli/Logic/CliParser.java" />
         <option value="$PROJECT_DIR$/src/Model/Wagon.java" />
+        <option value="$PROJECT_DIR$/src/controller/ChangeObserver.java" />
       </list>
     </option>
   </component>
@@ -829,16 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/ChangeObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="492">
-          <caret line="41" column="36" lean-forward="true" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/RichRail.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="325">
@@ -880,8 +856,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Cli/Logic/CliParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="937">
-          <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state relative-caret-position="687">
+          <caret line="108" column="44" lean-forward="true" selection-start-line="108" selection-start-column="44" selection-end-line="108" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/ChangeObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="964">
+          <caret line="67" column="1" lean-forward="false" selection-start-line="67" selection-start-column="1" selection-end-line="67" selection-end-column="1" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

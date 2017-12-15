@@ -1,8 +1,13 @@
 package controller;
 
 import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Label;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,26 +32,36 @@ public class ChangeObserver extends Observer
 		drawPanel.removeAll();
 		if (RichRail.getInstance().getAllItems() == null)
 			return;
-
 		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-		int yPos = 0;
-		GridBagConstraints constraints = new GridBagConstraints();
 		for (IItem item : items)
 		{
-			System.out.println(item.getName());
-			JLabel trainImage = new JLabel(new ImageIcon(item.getImage()));
-			drawPanel.add(trainImage,constraints);
-			constraints.gridy++;
-			if(!(item instanceof Train))
-				continue;
+			JLabel labeltrainimage = new JLabel(new ImageIcon(item.getImage()));
+
+			Label labelButtonPressHeading, labelButtonPressed;
+			labelButtonPressHeading = new Label();
+			labelButtonPressHeading.setText(item.getName());
+
+			drawPanel.add(labelButtonPressHeading, BorderLayout.LINE_START);
+			drawPanel.add(labeltrainimage);
 			if (((Train) item).getWagons().isEmpty())
 				continue;
-
+			int index = 0;
 			for (IItem i : ((Train) item).getWagons())
 			{
-				JLabel wagonImage = new JLabel(new ImageIcon(i.getImage()));
+				if (index++ == ((Train) item).getWagons().size() - 1)
+				{
+					JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
 
-				drawPanel.add(wagonImage,constraints);
+					drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+					drawPanel.add(Box.createRigidArea(new Dimension(75, 0)));
+				}
+				else
+				{
+
+					JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+
+					drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+				}
 			}
 		}
 	}
