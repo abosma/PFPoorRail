@@ -35,9 +35,8 @@ public class ActionController
 		RichRail.getInstance().addItem(factory.createWagon(wagon, seats));
 	}
 
-	public void addWagon(JTextField _textField, String selectedTrain)
+	public void addWagon(String wagon, String selectedTrain)
 	{
-		String wagon = _textField.getText();
 		if (StringExtension.stringIsNullOrEmpty(wagon))
 			return;
 		TrainFactory factory = new TrainFactory();
@@ -110,5 +109,18 @@ public class ActionController
 		if(toRemove == null)
 			return;
 		RichRail.getInstance().getAllItems().remove(toRemove);
+	}
+
+	public IItem GetItemByName(String name)
+	{
+		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		for(IItem item : items)
+		{
+			if(!item.getName().equals(name))
+				continue;
+
+			return item;
+		}
+		return null;
 	}
 }

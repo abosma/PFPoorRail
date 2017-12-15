@@ -1,8 +1,8 @@
 package Cli;
 
 import Cli.Logic.CliParser;
-import controller.ObserverController;
-
+import Model.RichRail;
+import controller.ChangeObserver;
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,10 +16,9 @@ public class CliPanel extends JPanel
     {
         setLayout(new GridBagLayout());
         GridBagConstraints constrains = new GridBagConstraints();
-
-        constrains.fill = GridBagConstraints.HORIZONTAL;
         constrains.gridy = 0;
         constrains.gridx = 0;
+        constrains.fill = GridBagConstraints.HORIZONTAL;
         CreateDrawPanel(constrains);
         constrains.gridy++;
         createTextArea(constrains);
@@ -34,8 +33,6 @@ public class CliPanel extends JPanel
         constrains.gridwidth = 2;
 
         CreateButton(constrains);
-
-
     }
 
     private void CreateDrawPanel( GridBagConstraints constrains)
@@ -43,8 +40,7 @@ public class CliPanel extends JPanel
         JPanel drawPanel = new JPanel();
         drawPanel.setBackground(Color.WHITE);
         add(drawPanel, constrains);
-
-        new ObserverController(drawPanel, null, null);
+        new ChangeObserver(RichRail.getInstance(), drawPanel);
     }
 
     private void CreateButton(GridBagConstraints constrains)

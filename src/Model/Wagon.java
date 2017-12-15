@@ -12,18 +12,19 @@ public class Wagon implements Serializable, IItem
 {
 	private int _id;
 	private int _length;
+	private int _seats;
 	private String _name;
 	private transient BufferedImage img;
 
 	public Wagon(String name, int seats, int id) {
 		this._id = id;
-		this._length = seats;
+		this._seats = seats;
 		this._name = name;
 	}
 	
 	public int getSeats()
 	{
-		return 0;
+		return _seats;
 	}
 
 	public int getLength()

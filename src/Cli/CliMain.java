@@ -1,7 +1,5 @@
 package Cli;
 
-import controller.GUIController;
-
 import javax.swing.*;
 
 public class CliMain

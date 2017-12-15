@@ -3,6 +3,9 @@ package Cli.Logic;
 import Actions.ActionController;
 import Extensions.ArrayExtensions;
 import Extensions.IntExtensions;
+import Extensions.StringExtension;
+import Model.IItem;
+import Model.Wagon;
 
 import javax.swing.*;
 
@@ -19,7 +22,8 @@ public class CliParser
 
     public void OnCommand(String command)
     {
-        String[] values = command.toLowerCase().split(" ");
+        command = command.trim().toLowerCase();
+        String[] values = StringExtension.Split(command," ",true);
         if(values.length == 0)
             return;
 
@@ -33,6 +37,9 @@ public class CliParser
             case "add":
                 AddTrain(data);
                 break;
+            case "getnumseats":
+                Get(data);
+                break;
             case "delete":
                 Delete(data);
                 break;
@@ -41,7 +48,7 @@ public class CliParser
                 break;
         }
 
-        _textArea.append(command);
+        _textArea.append("\n"+command);
     }
 
     private void New(String[] values)
@@ -55,33 +62,54 @@ public class CliParser
                 _action.addTrain(values[0]);
                 break;
             case "wagon":
-                if(!IntExtensions.IsInt(values[1]))
+                if(!IntExtensions.IsInt(values[2]))
                     return;
 
-                _action.addWagon(values[0],Integer.parseInt(values[1]));
+                _action.addWagon(values[1],Integer.parseInt(values[2]));
                 break;
         }
     }
 
-    private void Delete(String[] splitted)
+    private void Delete(String[] values)
     {
-        if(splitted.length < 2)
+        if(values.length < 2)
             return;
 
-        switch (splitted[0])
+        switch (values[0])
         {
             case "train":
-                _action.removeTrain(splitted[1]);
+                _action.removeTrain(values[1]);
                 break;
             case "wagon":
-                _action.Remove(splitted[1]);
+                _action.Remove(values[1]);
                 break;
         }
     }
 
-    private void Remove(String[] splitted)
+    private void Remove(String[] values)
     {
-        _action.removeWagon(splitted[0],splitted[1]);
+        if(values.length < 3)
+            return;
+
+        _action.removeWagon(values[0],values[2]);
+    }
+
+    private void Get(String[] values)
+    {
+        if(values.length < 2)
+            return;
+        IItem item = _action.GetItemByName(values[1]);
+        switch (values[0])
+        {
+            case "wagon":
+            {
+                if(!(item instanceof Wagon))
+                    return;
+
+                _textArea.append("\nSeats = "+ ((Wagon)item).getSeats());
+                break;
+            }
+        }
     }
 
     private void AddTrain(String[] values)
