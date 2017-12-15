@@ -1,10 +1,11 @@
 package Extensions;
 import java.util.Arrays;
 
+//Simple extensions
 public class ArrayExtensions
 {
     public static String[] Skip(String[] array, int skips)
     {
-        return Arrays.copyOfRange(array, 1, array.length);
+        return Arrays.copyOfRange(array, skips, array.length);
     }
 }

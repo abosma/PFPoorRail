@@ -4,85 +4,181 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
-import Extensions.HasObjectType;
 import Extensions.StringExtension;
 import Factories.RailwayFactory;
 import Factories.TrainFactory;
 import Model.IItem;
-import Model.RichRail;
+import Core.RichRail;
 import Model.Train;
-import Model.Wagon;
 
 public class ActionController
 {
-
-	public void addTrain(String train)
+	/**
+	 * Add a train with a name
+	 * @param train The name of the train
+	 */
+	public boolean addTrain(String train)
 	{
 		if (StringExtension.stringIsNullOrEmpty(train))
-			return;
+			return false;
+
+		//Check if a train with name exists
+		RichRail instance = RichRail.getInstance();
+		for (IItem i : instance.getAllItems())
+		{
+			if (!i.getName().equals(train))
+				continue;
+			return false;
+		}
+
+		//Create a new train and add to the list
 		RailwayFactory factory = new TrainFactory();
 		IItem t = factory.createTrain(train);
-		
-		for(IItem i : RichRail.getInstance().getAllItems()) {
-			if(i.getName().equals(train)) {
-				System.out.println("Trein bestaat al");
-				return;
-			}
-		}
-		
-		RichRail.getInstance().addItem(t);
+		instance.addItem(t);
+		return true;
 	}
 
-	public void addWagon(String wagon, int seats)
+	/**
+	 * Add a new wagon with a name and seats
+	 * @param name The name of the wagon
+	 * @param seats The amount of seats
+	 */
+	public void addWagon(String name, int seats)
+	{
+		if (StringExtension.stringIsNullOrEmpty(name))
+			return;
+
+		TrainFactory factory = new TrainFactory();
+		IItem wagon = factory.createWagon(name, seats);
+		RichRail.getInstance().addItem(wagon);
+	}
+
+	public void addWagon(String wagon, String trainName)
 	{
 		if (StringExtension.stringIsNullOrEmpty(wagon))
 			return;
-		TrainFactory factory = new TrainFactory();
 
-		RichRail.getInstance().addItem(factory.createWagon(wagon, seats));
-	}
+		Train train = GetTrainByName(trainName);
 
-	public void addWagon(String wagon, String selectedTrain)
-	{
-		if (StringExtension.stringIsNullOrEmpty(wagon))
+		if(train == null)
 			return;
+
 		TrainFactory factory = new TrainFactory();
-		for (IItem i : RichRail.getInstance().getAllItems())
-		{
-			if (i.getName().equals(selectedTrain))
-			{
-				((Train) i).addWagon(factory.createWagon(wagon, 10));
-				return;
-			}
-		}
+		train.addWagon(factory.createWagon(wagon, 10));
 	}
 
-	public void removeWagon(String selectedTrain, String selectedWagon)
+	/**
+	 * Remove all the wagons of a train
+	 * @param trainName the name of the train
+	 */
+	public void RemoveAllWagons(String trainName)
 	{
-		for (IItem i : RichRail.getInstance().getAllItems())
-		{
-			if (i.getName().equals(selectedTrain))
-			{
-				for (IItem wagon : ((Train) i).getWagons())
-				{
-					((Train) i).removeWagon(wagon);
-					return;
-				}
-			}
-		}
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		train.setWagons(new ArrayList<>());
 	}
 
-	public void removeTrain(String selectedTrain)
+	/**
+	 * Removes a train with its wagons
+	 * @param trainName The name of the train
+	 */
+	public void removeTrain(String trainName)
 	{
-		for (IItem i : RichRail.getInstance().getAllItems())
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		RichRail.getInstance().removeItem(train);
+	}
+
+	/**
+	 * Get a train by its name
+	 * @param name The name of the train
+	 * @return IItem as a train
+	 */
+	private Train GetTrainByName(String name)
+	{
+		for (IItem item : RichRail.getInstance().getAllItems())
 		{
-			if (i.getName().equals(selectedTrain))
-			{
-				RichRail.getInstance().removeItem(i);
-				return;
-			}
+			if (!item.getName().equals(name))
+				continue;
+
+			if(!(item instanceof Train))
+				continue;
+
+			return (Train)item;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get any item by its name
+	 * @param name The name of the item
+	 * @return IItem
+	 */
+	public IItem GetItemByName(String name)
+	{
+		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		for (IItem item : items)
+		{
+			if (!item.getName().equals(name))
+				continue;
+
+			return item;
+		}
+		return null;
+	}
+
+	/**
+	 * Remove any item by it's name
+	 * @param name The name of the item
+	 */
+	public void Remove(String name)
+	{
+		IItem item = GetItemByName(name);
+
+		if(item == null)
+			return;
+
+		RichRail.getInstance().getAllItems().remove(item);
+	}
+
+	/**
+	 * Assign a wagon to a train by name
+	 * @param trainName Name of the train
+	 * @param wagon The name of the wagon
+	 */
+	public void AssignWagonToTrain(String trainName, String wagon)
+	{
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		IItem item = GetItemByName(wagon);
+
+		if(item == null)
+			return;
+
+		RemoveItemFromTrain(item);
+		train.addWagon(item);
+	}
+
+	/**
+	 * Removes an item from all the trains
+	 * @param item The item to remove
+	 */
+	private void RemoveItemFromTrain(IItem item)
+	{
+		for(Train train : RichRail.getInstance().GetAllTrains())
+		{
+			train.RemoveItem(item);
 		}
 	}
 
@@ -105,61 +201,5 @@ public class ActionController
 		}
 	}
 
-	public void Remove(String name)
-	{
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-		IItem toRemove = null;
-		for (IItem i : items)
-		{
-			if(!i.getName().equals(name))
-				continue;
-			toRemove = i;
-			break;
-		}
-		if(toRemove == null)
-			return;
-		RichRail.getInstance().getAllItems().remove(toRemove);
-	}
 
-	public IItem GetItemByName(String name)
-	{
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-		for(IItem item : items)
-		{
-			if(!item.getName().equals(name))
-				continue;
-
-			return item;
-		}
-		return null;
-	}
-
-	public void AssignWagonToTrain(String train, String wagon)
-	{
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-		Train trainItem = null;
-		for (IItem item : items)
-		{
-			if (!item.getName().equals(train))
-				continue;
-
-			if (!(item instanceof Train))
-				continue;
-			trainItem = (Train) item;
-			break;
-		}
-		if (trainItem == null)
-			return;
-
-		for (IItem item : items)
-		{
-			if (!item.getName().equals(wagon))
-				continue;
-
-			if (!(item instanceof Wagon))
-				continue;
-
-			trainItem.addWagon(item);
-		}
-	}
 }

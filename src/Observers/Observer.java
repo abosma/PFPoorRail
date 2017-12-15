@@ -1,6 +1,6 @@
-package controller;
+package Observers;
 
-import Model.RichRail;
+import Core.RichRail;
 
 public abstract class Observer
 {

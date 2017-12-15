@@ -1,7 +1,7 @@
 package Factories;
 
 import Model.IItem;
-import Model.RichRail;
+import Core.RichRail;
 import Model.Train;
 import Model.Wagon;
 

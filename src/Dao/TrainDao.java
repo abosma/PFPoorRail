@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import Model.IItem;
-import Model.RichRail;
+import Core.RichRail;
 import Model.Train;
 
 public class TrainDao {

@@ -1,5 +1,6 @@
 package Extensions;
 
+//Simple extensions
 public class IntExtensions
 {
     public static boolean IsInt(String value)

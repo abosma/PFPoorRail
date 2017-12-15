@@ -2,6 +2,7 @@ package Extensions;
 
 import java.util.ArrayList;
 
+//Simple extensions
 public class StringExtension
 {
     public static boolean stringIsNullOrEmpty(String value)
@@ -9,16 +10,16 @@ public class StringExtension
         return value == null || value.trim().length() == 0;
     }
 
-    public static String[] Split(String value,String regex, boolean removeEmpty)
+    public static String[] Split(String value, String regex, boolean removeEmpty)
     {
         String[] values = value.split(regex);
 
-        if(!removeEmpty)
-            return  values;
-        ArrayList<String> data = new ArrayList<String>();
-        for(String item : values)
+        if (!removeEmpty)
+            return values;
+        ArrayList<String> data = new ArrayList<>();
+        for (String item : values)
         {
-            if(StringExtension.stringIsNullOrEmpty(item))
+            if (StringExtension.stringIsNullOrEmpty(item))
                 continue;
             data.add(item);
         }

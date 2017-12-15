@@ -1,8 +1,8 @@
 package Cli;
 
 import Cli.Logic.CliParser;
-import Model.RichRail;
-import controller.ChangeObserver;
+import Core.RichRail;
+import Observers.ChangeObserver;
 import javax.swing.*;
 import java.awt.*;
 

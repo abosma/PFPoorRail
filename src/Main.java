@@ -1,3 +1,4 @@
+import Cli.CliController;
 import controller.GUIController;
 
 import javax.swing.*;
@@ -14,9 +15,18 @@ public class Main
     {
         SwingUtilities.invokeLater(() ->
         {
-            GUIController inst = new GUIController();
+            JFrame inst = new CliController("RichRail cli");
             inst.setLocationRelativeTo(null);
             inst.setVisible(true);
         });
+
+        SwingUtilities.invokeLater(() ->
+        {
+            GUIController inst = new GUIController("RichRail");
+            inst.setLocationRelativeTo(null);
+            inst.setVisible(true);
+        });
+
+
     }
 }

@@ -94,7 +94,7 @@ public class CliParser
         if(values.length < 3)
             return;
 
-        _action.removeWagon(values[0],values[2]);
+        _action.RemoveAllWagons(values[0]);
     }
 
     private void Get(String[] values)

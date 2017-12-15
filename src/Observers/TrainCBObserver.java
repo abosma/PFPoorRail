@@ -1,4 +1,4 @@
-package controller;
+package Observers;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import Model.IItem;
-import Model.RichRail;
+import Core.RichRail;
 
 public class TrainCBObserver extends Observer
 {

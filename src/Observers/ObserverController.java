@@ -1,11 +1,9 @@
-package controller;
-
-import java.awt.Graphics;
+package Observers;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import Model.RichRail;
+import Core.RichRail;
 
 public class ObserverController
 {
