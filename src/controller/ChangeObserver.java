@@ -1,8 +1,12 @@
 package controller;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Label;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,7 +16,6 @@ import Model.Train;
 
 public class ChangeObserver extends Observer {
 
-	// private Graphics _graphics;
 	private JPanel drawPanel;
 
 	public ChangeObserver(RichRail rr, JPanel panel) {
@@ -27,15 +30,29 @@ public class ChangeObserver extends Observer {
 		if (RichRail.getInstance().getAllItems() != null) {
 			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
 			for (IItem item : items) {
-				System.out.println(item.getName());
 				JLabel labeltrainimage = new JLabel(new ImageIcon(item.getImage()));
-				drawPanel.add(labeltrainimage);
 
+				Label labelButtonPressHeading, labelButtonPressed;
+				labelButtonPressHeading = new Label();
+				labelButtonPressHeading.setText(item.getName());
+
+				drawPanel.add(labelButtonPressHeading, BorderLayout.LINE_START);
+				drawPanel.add(labeltrainimage);
 				if (((Train) item).getWagons().isEmpty()) {
 				} else {
+					int index = 0;
 					for (IItem i : ((Train) item).getWagons()) {
-						JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
-						drawPanel.add(labelwagonimage,  BorderLayout.LINE_END);
+						if (index++ == ((Train) item).getWagons().size() - 1) {
+							JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+
+							drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+							drawPanel.add(Box.createRigidArea(new Dimension(75, 0)));
+						} else {
+
+							JLabel labelwagonimage = new JLabel(new ImageIcon(i.getImage()));
+
+							drawPanel.add(labelwagonimage, BorderLayout.LINE_END);
+						}
 					}
 				}
 			}
