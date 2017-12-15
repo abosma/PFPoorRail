@@ -71,7 +71,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
 			addTrain.addActionListener(a ->
-				ac.addTrain(tfNewTrain)
+				ac.addTrain(tfNewTrain.getText())
 			);
 
 
@@ -98,7 +98,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a ->
-				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
+				ac.addWagon(tfNewWagon.getText(), (String)cbAllTrains.getSelectedItem())
 			);
 
 			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
