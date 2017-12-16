@@ -54,6 +54,28 @@ public class Train implements Serializable, IItem
 		allWagons.remove(item);
 	}
 
+	public void RemoveItemByName(String name)
+	{
+		IItem toRemove= null;
+		for (IItem item : allWagons)
+		{
+			if (!item.getName().equals(name))
+				continue;
+
+			if(!(item instanceof Component))
+				continue;
+
+			toRemove = item;
+			break;
+		}
+
+		if(toRemove == null)
+			return;
+
+		RemoveItem(toRemove);
+		RichRail.getInstance().notifyAllObservers();
+	}
+
 	public BufferedImage getImage()
 	{
 		try

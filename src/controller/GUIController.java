@@ -104,7 +104,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
-				ac.RemoveAllWagons((String) _trainSelect.getSelectedItem())
+				ac.RemoveWagon((String) _trainSelect.getSelectedItem(),(String)_wagonSelect.getSelectedItem())
 			);
 			
 			JFrame.getFrames()[0].addWindowListener(new CloseAction());

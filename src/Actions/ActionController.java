@@ -76,6 +76,20 @@ public class ActionController
 	}
 
 	/**
+	 * Remove the wagons of a train
+	 * @param trainName the name of the train
+	 */
+	public void RemoveWagon(String trainName,String wagonName)
+	{
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		train.RemoveItemByName(wagonName);
+	}
+
+	/**
 	 * Remove all the wagons of a train
 	 * @param trainName the name of the train
 	 */
