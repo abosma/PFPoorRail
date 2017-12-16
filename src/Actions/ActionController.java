@@ -63,6 +63,13 @@ public class ActionController
 
 		if(train == null)
 			return;
+		
+		for(IItem i : train.getWagons()) {
+			if(i.getName().equals(wagon)) {
+				System.out.println("Wagon already exists");
+				return;
+			}
+		}
 
 		TrainFactory factory = new TrainFactory();
 		train.addWagon(factory.createWagon(wagon, 10));
