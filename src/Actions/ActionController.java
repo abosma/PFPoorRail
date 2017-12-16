@@ -4,75 +4,209 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
-import Extensions.HasObjectType;
 import Extensions.StringExtension;
 import Factories.RailwayFactory;
 import Factories.TrainFactory;
 import Model.IItem;
-import Model.RichRail;
+import Core.RichRail;
 import Model.Train;
 
-public class ActionController {
-	
-	public void addTrain(JTextField _textField)
-    {
-        String train = _textField.getText();
-        if (StringExtension.stringIsNullOrEmpty(train))
-            return;
-        RailwayFactory factory = new TrainFactory();
-        IItem t = factory.createTrain(train);
-        RichRail.getInstance().addItem(t);
-    }
-	
-	public void addWagon(JTextField _textField, String selectedTrain) {
-		String wagon = _textField.getText();
-        if (StringExtension.stringIsNullOrEmpty(wagon))
-            return;
-        TrainFactory factory = new TrainFactory();
-        for(IItem i : RichRail.getInstance().getAllItems()) {
-        	if(i.getName().equals(selectedTrain)) {
-        		((Train) i).addWagon(factory.createWagon(wagon, 10));
-        	}
-        }
-	}
-	
-	public void removeWagon(String selectedTrain, String selectedWagon) {
-		for(IItem i : RichRail.getInstance().getAllItems()) {
-        	if(i.getName().equals(selectedTrain)) {
-        		for(IItem wagon : ((Train) i).getWagons()) {
-        			((Train) i).removeWagon(wagon);
-        			return;
-        		}
-        	}
+public class ActionController
+{
+	/**
+	 * Add a train with a name
+	 * @param train The name of the train
+	 */
+	public boolean addTrain(String train)
+	{
+		if (StringExtension.stringIsNullOrEmpty(train))
+			return false;
+
+		//Check if a train with name exists
+		RichRail instance = RichRail.getInstance();
+		for (IItem i : instance.getAllItems())
+		{
+			if (!i.getName().equals(train))
+				continue;
+			return false;
 		}
+
+		//Create a new train and add to the list
+		RailwayFactory factory = new TrainFactory();
+		IItem t = factory.createTrain(train);
+		instance.addItem(t);
+		return true;
 	}
-	
-	public void removeTrain(String selectedTrain) {
-		for(IItem i : RichRail.getInstance().getAllItems()) {
-        	if(i.getName().equals(selectedTrain)) {
-        		RichRail.getInstance().removeItem(i);
-        		return;
-        	}
-		}
+
+	/**
+	 * Add a new wagon with a name and seats
+	 * @param name The name of the wagon
+	 * @param seats The amount of seats
+	 */
+	public void addWagon(String name, int seats)
+	{
+		if (StringExtension.stringIsNullOrEmpty(name))
+			return;
+
+		TrainFactory factory = new TrainFactory();
+		IItem wagon = factory.createWagon(name, seats);
+		RichRail.getInstance().addItem(wagon);
 	}
-	
-	public void updateComboBoxes(JComboBox cbAllTrains, JComboBox cbAllWagons) {
+
+	public void addWagon(String wagon, String trainName)
+	{
+		if (StringExtension.stringIsNullOrEmpty(wagon))
+			return;
+
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
 		
+		for(IItem i : train.getWagons()) {
+			if(i.getName().equals(wagon)) {
+				System.out.println("Wagon already exists");
+				return;
+			}
+		}
+
+		TrainFactory factory = new TrainFactory();
+		train.addWagon(factory.createWagon(wagon, 10));
+	}
+
+	/**
+	 * Remove all the wagons of a train
+	 * @param trainName the name of the train
+	 */
+	public void RemoveAllWagons(String trainName)
+	{
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		train.setWagons(new ArrayList<>());
+	}
+
+	/**
+	 * Removes a train with its wagons
+	 * @param trainName The name of the train
+	 */
+	public void removeTrain(String trainName)
+	{
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		RichRail.getInstance().removeItem(train);
+	}
+
+	/**
+	 * Get a train by its name
+	 * @param name The name of the train
+	 * @return IItem as a train
+	 */
+	private Train GetTrainByName(String name)
+	{
+		for (IItem item : RichRail.getInstance().getAllItems())
+		{
+			if (!item.getName().equals(name))
+				continue;
+
+			if(!(item instanceof Train))
+				continue;
+
+			return (Train)item;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get any item by its name
+	 * @param name The name of the item
+	 * @return IItem
+	 */
+	public IItem GetItemByName(String name)
+	{
+		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		for (IItem item : items)
+		{
+			if (!item.getName().equals(name))
+				continue;
+
+			return item;
+		}
+		return null;
+	}
+
+	/**
+	 * Remove any item by it's name
+	 * @param name The name of the item
+	 */
+	public void Remove(String name)
+	{
+		IItem item = GetItemByName(name);
+
+		if(item == null)
+			return;
+
+		RichRail.getInstance().getAllItems().remove(item);
+	}
+
+	/**
+	 * Assign a wagon to a train by name
+	 * @param trainName Name of the train
+	 * @param wagon The name of the wagon
+	 */
+	public void AssignWagonToTrain(String trainName, String wagon)
+	{
+		Train train = GetTrainByName(trainName);
+
+		if(train == null)
+			return;
+
+		IItem item = GetItemByName(wagon);
+
+		if(item == null)
+			return;
+
+		RemoveItemFromTrain(item);
+		train.addWagon(item);
+	}
+
+	/**
+	 * Removes an item from all the trains
+	 * @param item The item to remove
+	 */
+	private void RemoveItemFromTrain(IItem item)
+	{
+		for(Train train : RichRail.getInstance().GetAllTrains())
+		{
+			train.RemoveItem(item);
+		}
+	}
+
+	public void updateComboBoxes(JComboBox cbAllTrains, JComboBox cbAllWagons)
+	{
 		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
 		ArrayList<String> wagonNames = new ArrayList<String>();
-		
-		for(IItem item : items)
-        {
-			if(item.getName().equals(cbAllTrains.getSelectedItem())) {
-				for(IItem i : ((Train) item).getWagons()) {
+
+		for (IItem item : items)
+		{
+			if (item.getName().equals(cbAllTrains.getSelectedItem()))
+			{
+				for (IItem i : ((Train) item).getWagons())
+				{
 					wagonNames.add(i.getName());
 				}
-				
+
 				cbAllWagons.setModel(new DefaultComboBoxModel(wagonNames.toArray()));
-	        }
-        }
+			}
+		}
 	}
-	
+
+
 }

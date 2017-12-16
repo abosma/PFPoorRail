@@ -1,34 +1,27 @@
 package Model;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
-public class Wagon implements Serializable, IItem
+public class Wagon implements Component
 {
 	private int _id;
-	private int _length;
+	private int _seats;
 	private String _name;
-	private transient BufferedImage img;
 
-	public Wagon(String name, int seats, int id) {
+	public Wagon(String name, int seats, int id)
+	{
 		this._id = id;
-		this._length = seats;
+		this._seats = seats;
 		this._name = name;
 	}
-	
+
 	public int getSeats()
 	{
-		return 0;
-	}
-
-	public int getLength()
-	{
-		return _length;
+		return _seats;
 	}
 
 	@Override
@@ -43,15 +36,16 @@ public class Wagon implements Serializable, IItem
 		return _id;
 	}
 
-	public BufferedImage getImage(){
-	    try {
-			img = ImageIO.read(new File("src/images/wagon.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+	public BufferedImage getImage()
+	{
+		try
+		{
+			return ImageIO.read(new File("src/images/wagon.png"));
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
-		return img;
+		return null;
 	}
-	
-	
 }

@@ -1,21 +1,17 @@
 package controller;
 
 import Actions.ActionController;
+import Actions.CloseAction;
 import Dao.TrainDao;
-import Model.RichRail;
-import Model.Train;
+import Core.RichRail;
+import Observers.ObserverController;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -23,12 +19,13 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener
 {
-	public JComboBox cbAllTrains;
-	public JComboBox cbAllWagons;
+	private JComboBox _trainSelect;
+	private JComboBox _wagonSelect;
 	
-	public GUIController() 
+	public GUIController(String title)
 	{
 		super();
+		setTitle(title);
 		initGUI();
 		RichRail.getInstance().setAllItems(TrainDao.getInstance().deserializeTrains());
 	}
@@ -38,8 +35,6 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		try 
 		{
 			ActionController ac = new ActionController();
-			
-			this.setTitle("RichRail");
 			GridBagLayout thisLayout = new GridBagLayout();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			thisLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
@@ -53,8 +48,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			getContentPane().add(mainPanel, new GridBagConstraints(0, 0, 4, 2, 0.0, 0.0, GridBagConstraints.EAST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 			
 			JPanel drawPanel = new JPanel();
-//			drawPanel.setBackground(Color.WHITE);
-			mainPanel.add(drawPanel,BorderLayout.LINE_START);
+			mainPanel.add(drawPanel);
 
 			JPanel trainPanel = createJPanel(0, 2, 1, 1);
 			
@@ -69,19 +63,21 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			trainPanel.add(tfNewTrain, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
 
 			JButton addTrain = createButton(2, 0, 1, 1, trainPanel, "Create Train");
-			addTrain.addActionListener(a -> 
-				ac.addTrain(tfNewTrain)
-			);
+			addTrain.addActionListener(a ->
+			{
+				if (!ac.addTrain(tfNewTrain.getText()))
+					System.out.println("Trein bestaat al");
+			});
 			
 			
-			cbAllTrains = createComboBox(1, 1, 1, 2, trainPanel);
-			cbAllTrains.addActionListener(a -> 
-				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
+			_trainSelect = createComboBox(1, 1, 1, 2, trainPanel);
+			_trainSelect.addActionListener(a ->
+				ac.updateComboBoxes(_trainSelect, _wagonSelect)
 			);
 
 			JButton deleteTrain = createButton(2, 2, 1, 1, trainPanel, "Delete Train");
 			deleteTrain.addActionListener(a -> 
-				ac.removeTrain((String) cbAllTrains.getSelectedItem())
+				ac.removeTrain((String) _trainSelect.getSelectedItem())
 			);
 
 			JPanel wagonPanel = createJPanel(1, 2, 2, 3);
@@ -97,67 +93,26 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			
 			JButton addWagon = createButton(1, 1, 1, 1, wagonPanel,"Add Wagon");
 			addWagon.addActionListener(a -> 
-				ac.addWagon(tfNewWagon, (String)cbAllTrains.getSelectedItem())
+				ac.addWagon(tfNewWagon.getText(), (String) _trainSelect.getSelectedItem())
 			);
 			
-			cbAllWagons = createComboBox(1, 2, 1, 2, wagonPanel);
-			cbAllWagons.addActionListener(a -> 
-				ac.updateComboBoxes(cbAllTrains, cbAllWagons)
+			_wagonSelect = createComboBox(1, 2, 1, 2, wagonPanel);
+			_wagonSelect.addActionListener(a ->
+				ac.updateComboBoxes(_trainSelect, _wagonSelect)
 			);
 			
 			
 			JButton deleteWagon = createButton(1, 3, 1, 1, wagonPanel, "Delete Wagon");
 			deleteWagon.addActionListener(a -> 
-				ac.removeWagon((String)cbAllTrains.getSelectedItem(), (String)cbAllWagons.getSelectedItem())
+				ac.RemoveAllWagons((String) _trainSelect.getSelectedItem())
 			);
 			
-			JFrame.getFrames()[0].addWindowListener(new WindowListener() {
-				@Override
-				public void windowOpened(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void windowClosing(WindowEvent e) {
-					TrainDao.getInstance().serializeItems();
-				}
-
-				@Override
-				public void windowClosed(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void windowIconified(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void windowDeiconified(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void windowActivated(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				@Override
-				public void windowDeactivated(WindowEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			JFrame.getFrames()[0].addWindowListener(new CloseAction());
 
 			pack();
 			setSize(800, 800);
 			
-			new ObserverController(drawPanel, cbAllTrains, cbAllWagons);
+			new ObserverController(drawPanel, _trainSelect, _wagonSelect);
 
 		}
 		catch (Exception e)
