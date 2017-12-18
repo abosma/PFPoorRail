@@ -2,6 +2,9 @@ package controller;
 
 import Actions.ActionFacade;
 import Actions.CloseAction;
+import Dao.Factories.DatabaseFactory;
+import Dao.Factories.DatabaseFactoryBase;
+import Dao.IDao;
 import Dao.TrainDao;
 import Core.RichRail;
 import Observers.ObserverController;
@@ -27,7 +30,9 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		super();
 		setTitle(title);
 		initGUI();
-		RichRail.getInstance().setAllItems(TrainDao.getInstance().deserializeTrains());
+		DatabaseFactoryBase dbFactory = new DatabaseFactory();
+		IDao doa = dbFactory.GetDoa();
+		RichRail.getInstance().setAllItems(doa.GetAll());
 	}
 	
 	private void initGUI() 

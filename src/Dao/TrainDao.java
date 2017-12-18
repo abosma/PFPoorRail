@@ -25,7 +25,6 @@ public class TrainDao {
 	}
 
 	File logFile = new File("all_trains.cooleextensie");
-	ArrayList<IItem> alltrains = new ArrayList<IItem>();
 
 	 // Call deserializeTrains on initialization program
 	@SuppressWarnings("unchecked")

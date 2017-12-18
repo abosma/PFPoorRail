@@ -1,6 +1,6 @@
 package Cli;
 
-import Cli.Logic.CliParser;
+import Cli.Logic.IParser;
 import Core.RichRail;
 import Observers.ChangeObserver;
 import javax.swing.*;
@@ -8,12 +8,13 @@ import java.awt.*;
 
 public class CliPanel extends JPanel
 {
-    private CliParser _cliParser;
+    private IParser _cliParser;
     private JTextField _input;
     private JTextArea _textArea;
 
-    public CliPanel()
+    public CliPanel(IParser parser)
     {
+        _cliParser = parser;
         setLayout(new GridBagLayout());
         GridBagConstraints constrains = new GridBagConstraints();
         constrains.gridy = 0;
@@ -22,7 +23,7 @@ public class CliPanel extends JPanel
         CreateDrawPanel(constrains);
         constrains.gridy++;
         createTextArea(constrains);
-        _cliParser = new CliParser(_textArea);
+        parser.SetTextField(_textArea);
         constrains.gridy++;
 
         CreateInput( constrains);

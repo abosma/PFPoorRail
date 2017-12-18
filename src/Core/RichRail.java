@@ -4,17 +4,15 @@ import java.util.*;
 
 import Model.IItem;
 import Model.Train;
-import Model.Wagon;
 import Observers.Observer;
 import Observers.Subject;
 
 public class RichRail implements Subject
 {
-	
 	private static volatile RichRail _instance;
 	
-	private ArrayList<IItem> _allItems = new ArrayList<>();
-	private List<Observer> observers = new ArrayList<Observer>();
+	private List<IItem> _allItems = new ArrayList<>();
+	private List<Observer> observers = new ArrayList<>();
 
 	private RichRail() {
 		
@@ -22,9 +20,9 @@ public class RichRail implements Subject
 	
 	public static RichRail getInstance()
 	{
-		if(null == _instance) {
+		if(_instance == null) {
 			synchronized(RichRail.class) {
-				if(null == _instance) {
+				if(_instance == null) {
 					_instance = new RichRail();
 				}
 			}
@@ -36,7 +34,7 @@ public class RichRail implements Subject
 		notifyObservers();
 	}
 
-	public ArrayList<IItem> getAllItems()
+	public List<IItem> getAllItems()
 	{
 		return _allItems;
 	}
@@ -54,21 +52,7 @@ public class RichRail implements Subject
 		return items;
 	}
 
-	public ArrayList<Wagon> GetAllWagons()
-	{
-		ArrayList<Wagon> items = new ArrayList<>();
-		for(IItem item : _allItems)
-		{
-			if(!(item instanceof Wagon))
-				continue;
-
-			items.add((Wagon)item);
-		}
-
-		return items;
-	}
-
-	public void setAllItems(ArrayList<IItem> at)
+	public void setAllItems(List<IItem> at)
 	{
 		_allItems = at;
 		listChanged();

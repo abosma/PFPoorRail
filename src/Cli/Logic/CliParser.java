@@ -9,15 +9,19 @@ import Model.Wagon;
 
 import javax.swing.*;
 
-public class CliParser
+public class CliParser implements IParser
 {
     private JTextArea _textArea;
     private ActionFacade _action;
 
-    public CliParser(JTextArea textArea)
+    public CliParser()
     {
         _action = new ActionFacade();
-        _textArea = textArea;
+    }
+
+    public void SetTextField(JTextArea area)
+    {
+        _textArea = area;
     }
 
     public void OnCommand(String command)
