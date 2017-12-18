@@ -1,10 +1,10 @@
 package controller;
 
-import Actions.ActionController;
+import Actions.ActionFacade;
 import Actions.CloseAction;
 import Dao.TrainDao;
 import Core.RichRail;
-import Observers.ObserverController;
+import Observers.Observable;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -34,7 +34,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 	{
 		try 
 		{
-			ActionController ac = new ActionController();
+			ActionFacade ac = new ActionFacade();
 			GridBagLayout thisLayout = new GridBagLayout();
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			thisLayout.rowWeights = new double[] {0.1, 0.1, 0.1, 0.1};
@@ -112,7 +112,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			pack();
 			setSize(800, 800);
 			
-			new ObserverController(drawPanel, _trainSelect, _wagonSelect);
+			new RichRail(drawPanel, _trainSelect, _wagonSelect);
 
 		}
 		catch (Exception e)

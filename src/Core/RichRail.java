@@ -6,19 +6,34 @@ import Model.IItem;
 import Model.Train;
 import Model.Wagon;
 import Observers.Observer;
+import Observers.Subject;
 
-public class RichRail
+public class RichRail implements Subject
 {
+	
+	private static volatile RichRail _instance;
+	
 	private ArrayList<IItem> _allItems = new ArrayList<>();
-	private List<Observer> observers = new ArrayList<>();
-	private static RichRail _instance;
+	private List<Observer> observers = new ArrayList<Observer>();
 
+	private RichRail() {
+		
+	}
+	
 	public static RichRail getInstance()
 	{
-		if (_instance == null)
-			_instance = new RichRail();
-
+		if(null == _instance) {
+			synchronized(RichRail.class) {
+				if(null == _instance) {
+					_instance = new RichRail();
+				}
+			}
+		}
 		return _instance;
+	}
+	
+	private void listChanged() {
+		notifyObservers();
 	}
 
 	public ArrayList<IItem> getAllItems()
@@ -26,10 +41,6 @@ public class RichRail
 		return _allItems;
 	}
 
-	/**
-	 * Omdat Java kut is dan maar zo
-	 * @return
-	 */
 	public ArrayList<Train> GetAllTrains()
 	{
 		ArrayList<Train> items = new ArrayList<>();
@@ -43,11 +54,6 @@ public class RichRail
 		return items;
 	}
 
-
-	/**
-	 * Omdat Java kut is dan maar zo
-	 * @return
-	 */
 	public ArrayList<Wagon> GetAllWagons()
 	{
 		ArrayList<Wagon> items = new ArrayList<>();
@@ -65,19 +71,19 @@ public class RichRail
 	public void setAllItems(ArrayList<IItem> at)
 	{
 		_allItems = at;
-		notifyAllObservers();
+		listChanged();
 	}
 
 	public void addItem(IItem it)
 	{
 		_allItems.add(it);
-		notifyAllObservers();
+		listChanged();
 	}
 
 	public void removeItem(IItem it)
 	{
 		_allItems.remove(it);
-		notifyAllObservers();
+		listChanged();
 	}
 
 	public int getLastId()
@@ -88,15 +94,23 @@ public class RichRail
 		return 0;
 	}
 
-	public void attach(Observer observer)
-	{
-		observers.add(observer);
+	@Override
+	public void registerObserver(Observer o) {
+		observers.add(o);
 	}
 
-	public void notifyAllObservers()
-	{
-		for (Observer o : observers)
-		{
+	@Override
+	public void removeObserver(Observer o) {
+		int i = observers.indexOf(o);
+		
+		if(i >= 0) {
+			observers.remove(i);
+		}
+	}
+
+	@Override
+	public void notifyObservers() {
+		for(Observer o : observers) {
 			o.update();
 		}
 	}

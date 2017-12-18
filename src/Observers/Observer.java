@@ -1,9 +1,6 @@
 package Observers;
 
-import Core.RichRail;
-
-public abstract class Observer
+public interface Observer
 {
-	protected RichRail rr;
-	public abstract void update();
+	public void update();
 }

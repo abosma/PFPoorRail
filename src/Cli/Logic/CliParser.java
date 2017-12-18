@@ -1,6 +1,6 @@
 package Cli.Logic;
 
-import Actions.ActionController;
+import Actions.ActionFacade;
 import Extensions.ArrayExtensions;
 import Extensions.IntExtensions;
 import Extensions.StringExtension;
@@ -12,11 +12,11 @@ import javax.swing.*;
 public class CliParser
 {
     private JTextArea _textArea;
-    private ActionController _action;
+    private ActionFacade _action;
 
     public CliParser(JTextArea textArea)
     {
-        _action = new ActionController();
+        _action = new ActionFacade();
         _textArea = textArea;
     }
 

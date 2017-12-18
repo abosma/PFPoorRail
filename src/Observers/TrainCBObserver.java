@@ -8,15 +8,17 @@ import javax.swing.JComboBox;
 import Model.IItem;
 import Core.RichRail;
 
-public class TrainCBObserver extends Observer
+public class TrainCBObserver implements Observer
 {
 
 	private JComboBox<String> _comboBoxes;
+	private Subject rr;
 
-	public TrainCBObserver(RichRail richRail, JComboBox<String> comboBoxes)
+	public TrainCBObserver(Subject rr, JComboBox<String> comboBoxes)
 	{
-		this.rr = richRail;
-		this.rr.attach(this);
+		this.rr = rr;
+		this.rr.registerObserver(this);
+		
 		this._comboBoxes = comboBoxes;
 	}
 

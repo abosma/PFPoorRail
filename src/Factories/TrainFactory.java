@@ -1,5 +1,6 @@
 package Factories;
 
+import Model.Component;
 import Model.IItem;
 import Core.RichRail;
 import Model.Train;
@@ -15,7 +16,7 @@ public class TrainFactory extends RailwayFactory
     }
 
     @Override
-    public IItem createWagon(String name, int seats)
+    public Component createWagon(String name, int seats)
     {
     	int id = RichRail.getInstance().getLastId();
         return new Wagon(name, seats, id);

@@ -40,13 +40,13 @@ public class Train implements Serializable, IItem
 	public void setWagons(ArrayList<IItem> wag)
 	{
 		allWagons = wag;
-		RichRail.getInstance().notifyAllObservers();
+		RichRail.getInstance().notifyObservers();
 	}
 
 	public void addWagon(IItem w)
 	{
 		allWagons.add(w);
-		RichRail.getInstance().notifyAllObservers();
+		RichRail.getInstance().notifyObservers();
 	}
 
 	public void RemoveItem(IItem item)
@@ -73,7 +73,7 @@ public class Train implements Serializable, IItem
 			return;
 
 		RemoveItem(toRemove);
-		RichRail.getInstance().notifyAllObservers();
+		RichRail.getInstance().notifyObservers();
 	}
 
 	public BufferedImage getImage()

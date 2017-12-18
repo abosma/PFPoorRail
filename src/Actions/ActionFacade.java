@@ -11,9 +11,17 @@ import Factories.TrainFactory;
 import Model.IItem;
 import Core.RichRail;
 import Model.Train;
+import Observers.Subject;
 
-public class ActionController
+public class ActionFacade
 {
+	
+	private RichRail rr;
+	
+	public ActionFacade() {
+		rr = RichRail.getInstance();
+	}
+	
 	/**
 	 * Add a train with a name
 	 * @param train The name of the train

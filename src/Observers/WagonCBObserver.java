@@ -9,16 +9,18 @@ import Model.IItem;
 import Core.RichRail;
 import Model.Train;
 
-public class WagonCBObserver extends Observer
+public class WagonCBObserver implements Observer
 {
 
 	private JComboBox<String> cbt;
 	private JComboBox<String> cbw;
+	private Subject rr;
 
-	public WagonCBObserver(RichRail rr, JComboBox<String> cbt, JComboBox<String> cbw)
+	public WagonCBObserver(Subject rr, JComboBox<String> cbt, JComboBox<String> cbw)
 	{
 		this.rr = rr;
-		this.rr.attach(this);
+		this.rr.registerObserver(this);
+		
 		this.cbt = cbt;
 		this.cbw = cbw;
 	}

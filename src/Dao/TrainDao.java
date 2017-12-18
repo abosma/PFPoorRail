@@ -10,12 +10,17 @@ import Model.Train;
 
 public class TrainDao {
 
-	private static TrainDao _instance;
+	private static volatile TrainDao _instance;
 
-	public static TrainDao getInstance() {
-		if (_instance == null)
-			_instance = new TrainDao();
-
+	public static TrainDao getInstance()
+	{
+		if(null == _instance) {
+			synchronized(TrainDao.class) {
+				if(null == _instance) {
+					_instance = new TrainDao();
+				}
+			}
+		}
 		return _instance;
 	}
 

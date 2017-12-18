@@ -12,14 +12,16 @@ import Core.RichRail;
 import Model.Train;
 import Model.Wagon;
 
-public class ChangeObserver extends Observer
+public class ChangeObserver implements Observer
 {
 	private JPanel drawPanel;
+	private Subject rr;
 
-	public ChangeObserver(RichRail rr, JPanel panel)
+	public ChangeObserver(Subject rr, JPanel panel)
 	{
 		this.rr = rr;
-		this.rr.attach(this);
+		this.rr.registerObserver(this);
+		
 		this.drawPanel = panel;
 	}
 
