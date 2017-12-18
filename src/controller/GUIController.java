@@ -4,7 +4,7 @@ import Actions.ActionFacade;
 import Actions.CloseAction;
 import Dao.TrainDao;
 import Core.RichRail;
-import Observers.Observable;
+import Observers.ObserverController;
 
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
@@ -112,7 +112,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			pack();
 			setSize(800, 800);
 			
-			new RichRail(drawPanel, _trainSelect, _wagonSelect);
+			new ObserverController(drawPanel, _trainSelect, _wagonSelect);
 
 		}
 		catch (Exception e)

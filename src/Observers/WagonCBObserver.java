@@ -14,12 +14,12 @@ public class WagonCBObserver implements Observer
 
 	private JComboBox<String> cbt;
 	private JComboBox<String> cbw;
-	private Subject rr;
+	private Subject sub;
 
-	public WagonCBObserver(Subject rr, JComboBox<String> cbt, JComboBox<String> cbw)
+	public WagonCBObserver(Subject sub, JComboBox<String> cbt, JComboBox<String> cbw)
 	{
-		this.rr = rr;
-		this.rr.registerObserver(this);
+		this.sub = sub;
+		this.sub.registerObserver(this);
 		
 		this.cbt = cbt;
 		this.cbw = cbw;

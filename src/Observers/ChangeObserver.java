@@ -15,12 +15,12 @@ import Model.Wagon;
 public class ChangeObserver implements Observer
 {
 	private JPanel drawPanel;
-	private Subject rr;
+	private Subject sub;
 
-	public ChangeObserver(Subject rr, JPanel panel)
+	public ChangeObserver(Subject sub, JPanel panel)
 	{
-		this.rr = rr;
-		this.rr.registerObserver(this);
+		this.sub = sub;
+		this.sub.registerObserver(this);
 		
 		this.drawPanel = panel;
 	}

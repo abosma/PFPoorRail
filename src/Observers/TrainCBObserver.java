@@ -12,12 +12,12 @@ public class TrainCBObserver implements Observer
 {
 
 	private JComboBox<String> _comboBoxes;
-	private Subject rr;
+	private Subject sub;
 
-	public TrainCBObserver(Subject rr, JComboBox<String> comboBoxes)
+	public TrainCBObserver(Subject sub, JComboBox<String> comboBoxes)
 	{
-		this.rr = rr;
-		this.rr.registerObserver(this);
+		this.sub = sub;
+		this.sub.registerObserver(this);
 		
 		this._comboBoxes = comboBoxes;
 	}
