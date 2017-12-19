@@ -48,4 +48,16 @@ public class Wagon implements Component
 		}
 		return null;
 	}
+
+	@Override
+	public void SetName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void SetId(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -2,6 +2,7 @@ package Observers;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -31,11 +32,11 @@ public class ChangeObserver implements Observer
 	{
 		//Clear the panel
 		drawPanel.removeAll();
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		List<IItem> items = RichRail.getInstance().getAllItems();
 		if (items == null)
 			return;
 
-		ArrayList<IItem> drawnItems = new ArrayList<>();
+		List<IItem> drawnItems = new ArrayList<>();
 		for (IItem item : items)
 		{
 			if(drawnItems.contains(item))

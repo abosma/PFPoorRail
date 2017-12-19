@@ -1,6 +1,7 @@
 package Actions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -146,7 +147,7 @@ public class ActionFacade
 	 */
 	public IItem GetItemByName(String name)
 	{
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		List<IItem> items = RichRail.getInstance().getAllItems();
 		for (IItem item : items)
 		{
 			if (!item.getName().equals(name))
@@ -206,7 +207,7 @@ public class ActionFacade
 
 	public void updateComboBoxes(JComboBox cbAllTrains, JComboBox cbAllWagons)
 	{
-		ArrayList<IItem> items = RichRail.getInstance().getAllItems();
+		List<IItem> items = RichRail.getInstance().getAllItems();
 		ArrayList<String> wagonNames = new ArrayList<String>();
 
 		for (IItem item : items)

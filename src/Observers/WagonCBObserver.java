@@ -1,6 +1,7 @@
 package Observers;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -30,8 +31,8 @@ public class WagonCBObserver implements Observer
 	{
 		if (RichRail.getInstance().getAllItems() != null)
 		{
-			ArrayList<IItem> items = RichRail.getInstance().getAllItems();
-			ArrayList<String> wagonNamen = new ArrayList<String>();
+			List<IItem> items = RichRail.getInstance().getAllItems();
+			List<String> wagonNamen = new ArrayList<String>();
 
 			String selectedTrain = (String) cbt.getSelectedItem();
 
