@@ -15,7 +15,7 @@ public class CloseAction implements WindowListener
 
     @Override
     public void windowClosing(WindowEvent e) {
-        //TrainDao.getInstance().serializeItems();
+//        TrainDao.getInstance().serializeItems();
     }
 
     @Override

@@ -40,4 +40,6 @@ public class TrainCBObserver implements Observer
 			names.clear();
 		}
 	}
+	
+
 }
