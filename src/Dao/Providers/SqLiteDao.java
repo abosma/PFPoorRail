@@ -60,14 +60,17 @@ public class SqLiteDao implements IDao
     {
         if(item.getId() > 0)
         {
-            String sql = "UPDATE Items SET Name = ?, Type = ? WHERE Id = ?";
-            _connection.NonQuery(sql,item.getName(),item.getClass(),item.getId());
+            String sql = "UPDATE Items SET Name = ?, Type = ?, ref_Parent = ? WHERE Id = ?";
+            _connection.NonQuery(sql,item.getName(),item.getClass(),item.GetParent(), item.getId());
             return item.getId();
         }
 
 
-        String sql = "INSERT INTO Items (Name,Type) VALUES (?,?);";
-        return _connection.Scalar(sql,item.getName(),item.getClass());
+        String sql = "INSERT INTO Items (Name,Type, ref_Parent) VALUES (?,?, ?);";
+        _connection.NonQuery(sql,item.getName(),item.getClass(), item.GetParent());
+        int id = _connection.Scalar("select last_insert_rowid()");
+
+        return id;
     }
 
     @Override
@@ -85,7 +88,8 @@ public class SqLiteDao implements IDao
         String sql = "CREATE TABLE IF NOT EXISTS Items (\n"
                 + "	Id integer PRIMARY KEY,\n"
                 + "	Name text NOT NULL,\n"
-                + "	Type text NOT NULL);";
+                + "	Type text NOT NULL,\n"
+                + " ref_Parent integer);";
 
         _connection.NonQuery(sql);
     }

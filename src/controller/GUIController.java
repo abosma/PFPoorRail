@@ -2,10 +2,6 @@ package controller;
 
 import Actions.ActionFacade;
 import Actions.CloseAction;
-import Dao.Factories.DatabaseFactory;
-import Dao.Factories.DatabaseFactoryBase;
-import Dao.IDao;
-import Core.RichRail;
 import Observers.ObserverController;
 
 import java.awt.BorderLayout;

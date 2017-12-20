@@ -6,6 +6,7 @@ public class Wagon implements Component
 	private int _id;
 	private int _seats;
 	private String _name;
+	private int _parent;
 
 	public Wagon()
 	{
@@ -40,6 +41,17 @@ public class Wagon implements Component
 	{
 		_name = name;
 
+	}
+
+	@Override
+	public int GetParent()
+	{
+		return _parent;
+	}
+
+	public void SetParent(int parentId)
+	{
+		_parent = parentId;
 	}
 
 	@Override

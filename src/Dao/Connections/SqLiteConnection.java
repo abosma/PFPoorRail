@@ -11,7 +11,7 @@ public class SqLiteConnection implements IConnection
     @Override
     public String GetConnectionString()
     {
-        return "jdbc:sqlite:C:/sqlite/db/tests.db";
+        return "jdbc:sqlite:C:/sqlite/db/test.db";
     }
 
     @Override
@@ -36,7 +36,7 @@ public class SqLiteConnection implements IConnection
 
             for(int i = 0; i < params.length; i++)
             {
-                statement.setObject(i,params[i]);
+                statement.setObject((i + 1),params[i]);
             }
             return statement.execute();
 
@@ -49,7 +49,7 @@ public class SqLiteConnection implements IConnection
     }
 
     @Override
-    public int Scalar(String query, Object... params)
+    public <T> T Scalar(String query, Object... params)
     {
         try
         {
@@ -58,15 +58,28 @@ public class SqLiteConnection implements IConnection
 
             for(int i = 0; i < params.length; i++)
             {
-                statement.setObject((i + 1),params[i]);
+                statement.setObject((i + 1),params);
             }
-            return statement.executeUpdate();
+            ResultSet result = statement.executeQuery();
+            List<Map<String, Object>> values = new ArrayList<>();
+
+            while (result.next())
+            {
+                ResultSetMetaData meta = result.getMetaData();
+                int columns = meta.getColumnCount();
+                Map<String, Object> data = new HashMap<>();
+                for (int i = 0; i < columns; i++)
+                {
+                    return (T)result.getObject(i + 1);
+                }
+            }
+
         }
         catch (SQLException ex)
         {
-            //ignore
+            ex.printStackTrace();
         }
-        return -1;
+        return null;
     }
 
     @Override

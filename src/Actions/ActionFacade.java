@@ -190,6 +190,9 @@ public class ActionFacade
 
 		RemoveItemFromTrain(item);
 		train.addWagon(item);
+		item.SetParent(train.getId());
+
+		RichRail.getInstance().addItem(item);
 	}
 
 	/**

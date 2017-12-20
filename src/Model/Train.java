@@ -33,6 +33,18 @@ public class Train implements IItem
 	}
 
 	@Override
+	public int GetParent()
+	{
+		return -1;
+	}
+
+	@Override
+	public void SetParent(int id)
+	{
+
+	}
+
+	@Override
 	public void SetName(String name)
 	{
 		_name = name;
