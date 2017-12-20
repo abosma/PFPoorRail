@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 public class Train implements Serializable, IItem
 {
-	private ArrayList<IItem> allWagons = new ArrayList<IItem>();
+	private List<IItem> allWagons = new ArrayList<IItem>();
 	private int _id;
 	private String _name;
 
@@ -32,12 +32,12 @@ public class Train implements Serializable, IItem
 		return _id;
 	}
 
-	public ArrayList<IItem> getWagons()
+	public List<IItem> getWagons()
 	{
 		return allWagons;
 	}
 
-	public void setWagons(ArrayList<IItem> wag)
+	public void setWagons(List<IItem> wag)
 	{
 		allWagons = wag;
 		RichRail.getInstance().notifyObservers();
