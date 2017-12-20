@@ -5,6 +5,7 @@ import Core.RichRail;
 import java.util.*;
 
 
+@SuppressWarnings("serial")
 public class Train implements IItem
 {
 	private List<IItem> allWagons = new ArrayList<>();

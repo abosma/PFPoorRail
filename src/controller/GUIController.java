@@ -21,9 +21,8 @@ import javax.swing.border.BevelBorder;
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener
 {
-	private JComboBox _trainSelect;
-	private JComboBox _wagonSelect;
-	private ActionFacade ac = new ActionFacade();
+	private JComboBox<String> _trainSelect;
+	private JComboBox<String> _wagonSelect;
 
 	public GUIController(String title)
 	{
@@ -138,7 +137,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		return tempButton;
 	}
 
-	private JComboBox createComboBox(int x, int y, int width, int height, JPanel panel)
+	private JComboBox<String> createComboBox(int x, int y, int width, int height, JPanel panel)
 	{
 		ComboBoxModel cbTempModel = new DefaultComboBoxModel(new String[]{});
 		JComboBox cbTempComboBox = new JComboBox();
@@ -166,5 +165,4 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		// TODO Auto-generated method stub
 
 	}
-
 }

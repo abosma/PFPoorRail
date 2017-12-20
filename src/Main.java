@@ -1,6 +1,4 @@
 import Cli.CliController;
-import Dao.Factories.DatabaseFactory;
-import Dao.Factories.DatabaseFactoryBase;
 import controller.GUIController;
 
 import javax.swing.*;

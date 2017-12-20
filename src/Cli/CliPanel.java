@@ -6,6 +6,7 @@ import Observers.ChangeObserver;
 import javax.swing.*;
 import java.awt.*;
 
+@SuppressWarnings("serial")
 public class CliPanel extends JPanel
 {
     private IParser _cliParser;

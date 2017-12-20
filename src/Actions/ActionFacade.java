@@ -12,7 +12,6 @@ import Factories.TrainFactory;
 import Model.IItem;
 import Core.RichRail;
 import Model.Train;
-import Observers.Subject;
 
 public class ActionFacade
 {
@@ -205,10 +204,10 @@ public class ActionFacade
 		}
 	}
 
-	public void updateComboBoxes(JComboBox cbAllTrains, JComboBox cbAllWagons)
+	public void updateComboBoxes(JComboBox<String> cbAllTrains, JComboBox<String> cbAllWagons)
 	{
 		List<IItem> items = RichRail.getInstance().getAllItems();
-		ArrayList<String> wagonNames = new ArrayList<String>();
+		List<String> wagonNames = new ArrayList<>();
 
 		for (IItem item : items)
 		{

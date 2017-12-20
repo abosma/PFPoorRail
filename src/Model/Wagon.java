@@ -1,5 +1,6 @@
 package Model;
 
+@SuppressWarnings("serial")
 public class Wagon implements Component
 {
 	private int _id;

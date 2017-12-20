@@ -4,6 +4,7 @@ import Cli.Logic.IParser;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class CliController extends JFrame
 {
     public CliController(String title)
