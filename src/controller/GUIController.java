@@ -5,7 +5,6 @@ import Actions.CloseAction;
 import Dao.Factories.DatabaseFactory;
 import Dao.Factories.DatabaseFactoryBase;
 import Dao.IDao;
-import Dao.TrainDao;
 import Core.RichRail;
 import Observers.ObserverController;
 
@@ -21,8 +20,8 @@ import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class GUIController extends javax.swing.JFrame implements ActionListener {
-	private JComboBox _trainSelect;
-	private JComboBox _wagonSelect;
+	private JComboBox<String> _trainSelect;
+	private JComboBox<String> _wagonSelect;
 
 	ActionFacade ac = new ActionFacade();
 
@@ -138,7 +137,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener 
 		return tempButton;
 	}
 
-	private JComboBox createComboBox(int x, int y, int width, int height, JPanel panel) {
+	private JComboBox<String> createComboBox(int x, int y, int width, int height, JPanel panel) {
 		ComboBoxModel cbTempModel = new DefaultComboBoxModel(new String[] {});
 		JComboBox cbTempComboBox = new JComboBox();
 		panel.add(cbTempComboBox, new GridBagConstraints(x, y, width, height, 0.0, 0.0, GridBagConstraints.CENTER,

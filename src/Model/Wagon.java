@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+@SuppressWarnings("serial")
 public class Wagon implements Component
 {
 	private int _id;

@@ -54,7 +54,7 @@ public class WagonCBObserver implements Observer
 			}
 			else
 			{
-				cbw.setModel(new DefaultComboBoxModel(new String[]{}));
+				cbw.setModel(new DefaultComboBoxModel<String>(new String[]{}));
 			}
 		}
 	}
