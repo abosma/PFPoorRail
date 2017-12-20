@@ -2,6 +2,9 @@ package Core;
 
 import java.util.*;
 
+import Dao.Factories.DatabaseFactory;
+import Dao.Factories.DatabaseFactoryBase;
+import Dao.IDao;
 import Model.IItem;
 import Model.Train;
 import Observers.Observer;
@@ -13,9 +16,13 @@ public class RichRail implements Subject
 	
 	private List<IItem> _allItems = new ArrayList<>();
 	private List<Observer> observers = new ArrayList<>();
+	private IDao _itemDoa;
 
-	private RichRail() {
-		
+	private RichRail()
+	{
+		DatabaseFactoryBase dbFactory = new DatabaseFactory();
+		_itemDoa = dbFactory.GetDoa();
+		setAllItems(_itemDoa.GetAll());
 	}
 	
 	public static RichRail getInstance()
@@ -61,21 +68,15 @@ public class RichRail implements Subject
 	public void addItem(IItem it)
 	{
 		_allItems.add(it);
+		it.SetId(_itemDoa.Store(it));
 		listChanged();
 	}
 
 	public void removeItem(IItem it)
 	{
 		_allItems.remove(it);
+		_itemDoa.Remove(it);
 		listChanged();
-	}
-
-	public int getLastId()
-	{
-		if (!_allItems.isEmpty())
-			return (_allItems.get(_allItems.size() - 1).getId());
-
-		return 0;
 	}
 
 	@Override

@@ -36,16 +36,18 @@ public class SqLiteDao implements IDao
             try
             {
                 //Create a new instance of the type and set data
-                IItem instance = (IItem) Class.forName(type).newInstance();
+                IItem instance = (IItem) (Class.forName(type.replace("class ","")).newInstance());
 
                 if(instance == null)
                     continue;
 
                 instance.SetId(id);
                 instance.SetName(name);
+                items.add(instance);
             }
             catch (Exception ex)
             {
+                ex.printStackTrace();
                 //ignore
             }
 
@@ -54,9 +56,25 @@ public class SqLiteDao implements IDao
     }
 
     @Override
-    public void Store(IItem item)
+    public int Store(IItem item)
     {
+        if(item.getId() > 0)
+        {
+            String sql = "UPDATE Items SET Name = ?, Type = ? WHERE Id = ?";
+            _connection.NonQuery(sql,item.getName(),item.getClass(),item.getId());
+            return item.getId();
+        }
 
+
+        String sql = "INSERT INTO Items (Name,Type) VALUES (?,?);";
+        return _connection.Scalar(sql,item.getName(),item.getClass());
+    }
+
+    @Override
+    public boolean Remove(IItem item)
+    {
+        String sql = "DELETE FROM Items WHERE Id = ?";
+        return _connection.NonQuery(sql,item.getId());
     }
 
     /**
@@ -67,8 +85,7 @@ public class SqLiteDao implements IDao
         String sql = "CREATE TABLE IF NOT EXISTS Items (\n"
                 + "	Id integer PRIMARY KEY,\n"
                 + "	Name text NOT NULL,\n"
-                + "	Type text NOT NULL"
-                + ");";
+                + "	Type text NOT NULL);";
 
         _connection.NonQuery(sql);
     }

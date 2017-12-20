@@ -36,7 +36,7 @@ public class SqLiteConnection implements IConnection
 
             for(int i = 0; i < params.length; i++)
             {
-                statement.setObject(i,params);
+                statement.setObject(i,params[i]);
             }
             return statement.execute();
 
@@ -49,6 +49,27 @@ public class SqLiteConnection implements IConnection
     }
 
     @Override
+    public int Scalar(String query, Object... params)
+    {
+        try
+        {
+            PreparedStatement statement = CreateConnection()
+                    .prepareStatement(query);
+
+            for(int i = 0; i < params.length; i++)
+            {
+                statement.setObject((i + 1),params[i]);
+            }
+            return statement.executeUpdate();
+        }
+        catch (SQLException ex)
+        {
+            //ignore
+        }
+        return -1;
+    }
+
+    @Override
     public List<Map<String, Object>> Query(String query, Object... params)
     {
         try
@@ -58,7 +79,7 @@ public class SqLiteConnection implements IConnection
 
             for(int i = 0; i < params.length; i++)
             {
-                statement.setObject(i,params);
+                statement.setObject((i + 1),params);
             }
             ResultSet result = statement.executeQuery();
             List<Map<String, Object>> values = new ArrayList<>();
@@ -70,7 +91,7 @@ public class SqLiteConnection implements IConnection
                 Map<String, Object> data = new HashMap<>();
                 for (int i = 0; i < columns; i++)
                 {
-                    data.put(meta.getColumnName(i),result.getObject(i));
+                    data.put(meta.getColumnName(i + 1),result.getObject(i + 1));
                 }
                 values.add(data);
             }

@@ -2,24 +2,23 @@ package Model;
 
 import Core.RichRail;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
 
-import javax.imageio.ImageIO;
 
-public class Train implements Serializable, IItem
+public class Train implements IItem
 {
-	private List<IItem> allWagons = new ArrayList<IItem>();
+	private List<IItem> allWagons = new ArrayList<>();
 	private int _id;
 	private String _name;
 
-	public Train(String name, int id)
+	public Train()
+	{
+
+	}
+
+	public Train(String name)
 	{
 		_name = name;
-		_id = id;
 	}
 
 	public String getName()
@@ -30,6 +29,20 @@ public class Train implements Serializable, IItem
 	public int getId()
 	{
 		return _id;
+	}
+
+	@Override
+	public void SetName(String name)
+	{
+		_name = name;
+
+	}
+
+	@Override
+	public void SetId(int id)
+	{
+		_id = id;
+
 	}
 
 	public List<IItem> getWagons()
@@ -74,30 +87,5 @@ public class Train implements Serializable, IItem
 
 		RemoveItem(toRemove);
 		RichRail.getInstance().notifyObservers();
-	}
-
-	public BufferedImage getImage()
-	{
-		try
-		{
-			return ImageIO.read(new File("src/images/train.png"));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	@Override
-	public void SetName(String name) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void SetId(int id) {
-		// TODO Auto-generated method stub
-		
 	}
 }

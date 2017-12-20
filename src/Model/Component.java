@@ -1,8 +1,6 @@
 package Model;
 
-import java.io.Serializable;
-
-public interface Component extends Serializable, IItem
+public interface Component extends IItem
 {
 	
 }

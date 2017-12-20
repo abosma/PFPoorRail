@@ -12,5 +12,6 @@ public interface IConnection
     Connection CreateConnection() throws SQLException;
     Statement CreateStatement() throws SQLException;
     boolean NonQuery(String query, Object... params);
+    int Scalar(String query, Object... params);
     List<Map<String, Object>> Query(String query, Object... params);
 }

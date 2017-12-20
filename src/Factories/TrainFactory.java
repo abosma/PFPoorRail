@@ -11,14 +11,12 @@ public class TrainFactory extends RailwayFactory
     @Override
     public IItem createTrain(String name)
     {
-        int id = RichRail.getInstance().getLastId();
-        return new Train(name,id);
+        return new Train(name);
     }
 
     @Override
     public Component createWagon(String name, int seats)
     {
-    	int id = RichRail.getInstance().getLastId();
-        return new Wagon(name, seats, id);
+        return new Wagon(name, seats);
     }
 }
