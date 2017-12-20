@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import Model.IItem;
 import Core.RichRail;
 import Model.Train;
+import Model.Wagon;
 
 public class ChangeObserver implements Observer
 {

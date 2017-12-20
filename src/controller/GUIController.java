@@ -23,6 +23,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 {
 	private JComboBox<String> _trainSelect;
 	private JComboBox<String> _wagonSelect;
+	private ActionFacade ac = new ActionFacade();
 
 	public GUIController(String title)
 	{

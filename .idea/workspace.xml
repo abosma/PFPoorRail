@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3055e7c9-0024-4d49-ada0-8fd2a0fc9c1e" name="Default" comment="dingen">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Actions/ActionFacade.java" afterPath="$PROJECT_DIR$/src/Actions/ActionFacade.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cli/CliController.java" afterPath="$PROJECT_DIR$/src/Cli/CliController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Cli/CliPanel.java" afterPath="$PROJECT_DIR$/src/Cli/CliPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Train.java" afterPath="$PROJECT_DIR$/src/Model/Train.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Model/Wagon.java" afterPath="$PROJECT_DIR$/src/Model/Wagon.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Observers/ChangeObserver.java" afterPath="$PROJECT_DIR$/src/Observers/ChangeObserver.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Observers/WagonCBObserver.java" afterPath="$PROJECT_DIR$/src/Observers/WagonCBObserver.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/GUIController.java" afterPath="$PROJECT_DIR$/src/controller/GUIController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -103,16 +96,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-              <folding>
-                <marker date="1513778190114" expanded="true" signature="107:176" ph="/**...*/" />
-                <marker date="1513778190114" expanded="true" signature="224:579" ph="{...}" />
-                <marker date="1513778190114" expanded="true" signature="275:571" ph="{...}" />
-              </folding>
+            <state relative-caret-position="200">
+              <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,14 +140,26 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GUIController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controller/GUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3685">
-              <caret line="167" column="1" lean-forward="false" selection-start-line="167" selection-start-column="1" selection-end-line="167" selection-end-column="1" />
+            <state relative-caret-position="-2740">
+              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <marker date="1513778286459" expanded="true" signature="5854:5857" ph="{}" />
+                <marker date="1513778346315" expanded="true" signature="5901:5904" ph="{}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChangeObserver.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Observers/ChangeObserver.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="197">
+              <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -246,7 +247,6 @@
         <option value="$PROJECT_DIR$/src/Observers/Subject.java" />
         <option value="$PROJECT_DIR$/src/Observers/ObserverController.java" />
         <option value="$PROJECT_DIR$/src/Observers/Observer.java" />
-        <option value="$PROJECT_DIR$/src/Observers/ChangeObserver.java" />
         <option value="$PROJECT_DIR$/src/Model/IItem.java" />
         <option value="$PROJECT_DIR$/src/Dao/IDao.java" />
         <option value="$PROJECT_DIR$/src/Core/RichRail.java" />
@@ -257,6 +257,7 @@
         <option value="$PROJECT_DIR$/src/Model/Wagon.java" />
         <option value="$PROJECT_DIR$/src/Model/Train.java" />
         <option value="$PROJECT_DIR$/src/controller/GUIController.java" />
+        <option value="$PROJECT_DIR$/src/Observers/ChangeObserver.java" />
       </list>
     </option>
   </component>
@@ -580,7 +581,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2161595" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2161595" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -642,6 +643,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="301">
           <caret line="50" column="17" lean-forward="false" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -808,14 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Observers/ChangeObserver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="303">
-          <caret line="17" column="21" lean-forward="true" selection-start-line="17" selection-start-column="21" selection-end-line="17" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Model/IItem.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -944,18 +938,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="15" column="23" lean-forward="false" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding>
-            <marker date="1513778190114" expanded="true" signature="107:176" ph="/**...*/" />
-            <marker date="1513778190114" expanded="true" signature="224:579" ph="{...}" />
-            <marker date="1513778190114" expanded="true" signature="275:571" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Dao/Providers/SqLiteDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-193">
@@ -1005,12 +987,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controller/GUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3685">
-          <caret line="167" column="1" lean-forward="false" selection-start-line="167" selection-start-column="1" selection-end-line="167" selection-end-column="1" />
+        <state relative-caret-position="-2740">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <marker date="1513778286459" expanded="true" signature="5854:5857" ph="{}" />
+            <marker date="1513778346315" expanded="true" signature="5901:5904" ph="{}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Observers/ChangeObserver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="30" column="25" lean-forward="false" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="11" column="18" lean-forward="false" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+          <folding />
         </state>
       </provider>
     </entry>
