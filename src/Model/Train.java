@@ -10,6 +10,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
+@SuppressWarnings("serial")
 public class Train implements Serializable, IItem
 {
 	private List<IItem> allWagons = new ArrayList<IItem>();
