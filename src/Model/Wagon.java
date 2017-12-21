@@ -1,7 +1,7 @@
 package Model;
 
 @SuppressWarnings("serial")
-public class Wagon implements Component
+public class Wagon implements IItem
 {
 	private int _id;
 	private int _seats;

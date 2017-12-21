@@ -9,5 +9,4 @@ public interface IDao
     List<IItem> GetAll();
     int Store(IItem item);
     boolean Remove(IItem item);
-
 }

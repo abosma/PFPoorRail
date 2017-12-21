@@ -11,19 +11,13 @@ public class SqLiteConnection implements IConnection
     @Override
     public String GetConnectionString()
     {
-        return "jdbc:sqlite:C:/sqlite/db/test.db";
+        return "jdbc:sqlite:C:/temp/railway.db";
     }
 
     @Override
     public Connection CreateConnection() throws SQLException
     {
          return DriverManager.getConnection(GetConnectionString());
-    }
-
-    @Override
-    public Statement CreateStatement() throws SQLException
-    {
-        return CreateConnection().createStatement();
     }
 
     @Override
@@ -61,13 +55,10 @@ public class SqLiteConnection implements IConnection
                 statement.setObject((i + 1),params);
             }
             ResultSet result = statement.executeQuery();
-            List<Map<String, Object>> values = new ArrayList<>();
-
             while (result.next())
             {
                 ResultSetMetaData meta = result.getMetaData();
                 int columns = meta.getColumnCount();
-                Map<String, Object> data = new HashMap<>();
                 for (int i = 0; i < columns; i++)
                 {
                     return (T)result.getObject(i + 1);

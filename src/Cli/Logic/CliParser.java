@@ -39,7 +39,7 @@ public class CliParser implements IParser
                 New(data);
                 break;
             case "add":
-                AddTrain(data);
+                AddChild(data);
                 break;
             case "getnumseats":
                 Get(data);
@@ -85,8 +85,6 @@ public class CliParser implements IParser
         switch (values[0])
         {
             case "train":
-                _action.removeTrain(values[1]);
-                break;
             case "wagon":
                 _action.Remove(values[1]);
                 break;
@@ -98,7 +96,7 @@ public class CliParser implements IParser
         if(values.length < 3)
             return;
 
-        _action.RemoveAllWagons(values[0]);
+        _action.RemoveAllChild(values[0]);
     }
 
     private void Get(String[] values)
@@ -119,14 +117,14 @@ public class CliParser implements IParser
         }
     }
 
-    private void AddTrain(String[] values)
+    private void AddChild(String[] values)
     {
         if(values.length < 2)
             return;
 
-        String wagon = values[0];
-        String train = values[2];
+        String childName = values[0];
+        String parentName = values[2];
 
-        _action.AssignWagonToTrain(train,wagon);
+        _action.AssignItemToItem(parentName,childName);
     }
 }

@@ -13,53 +13,53 @@ import Model.Train;
 public class ComponentCBObserver implements Observer
 {
 
-	private JComboBox<String> cbt;
-	private JComboBox<String> cbw;
-	private Subject sub;
+	private JComboBox<String> _cbt;
+	private JComboBox<String> _cbw;
 
 	public ComponentCBObserver(Subject sub, JComboBox<String> cbt, JComboBox<String> cbw)
 	{
-		this.sub = sub;
-		this.sub.registerObserver(this);
-		
-		this.cbt = cbt;
-		this.cbw = cbw;
-		this.update();
+		sub.registerObserver(this);
+
+		_cbt = cbt;
+		_cbw = cbw;
+		update();
 	}
 
 	@Override
 	public void update()
 	{
-		if (RichRail.getInstance().getAllItems() != null)
+		if (RichRail.getInstance().getAllItems() == null)
+			return;
+
+		List<IItem> items = RichRail.getInstance().getAllItems();
+		List<String> wagonName = new ArrayList<String>();
+
+		String selectedTrain = (String) _cbt.getSelectedItem();
+
+		if (selectedTrain != null)
 		{
-			List<IItem> items = RichRail.getInstance().getAllItems();
-			List<String> wagonNamen = new ArrayList<String>();
-
-			String selectedTrain = (String) cbt.getSelectedItem();
-
-			if (selectedTrain != null)
+			for (IItem i : items)
 			{
-				for (IItem i : items)
+				if (!(i instanceof Train))
+					continue;
+
+				if (i.getName().equals(selectedTrain))
 				{
-					if(i instanceof Train){
-					
-					if (i.getName().equals(selectedTrain))
+					for (IItem w : items)
 					{
-						for (IItem w : ((Train) i).getComponents())
-						{
-							wagonNamen.add(w.getName());
-						}
+						if (w.GetParent() != i.getId())
+							continue;
+
+						wagonName.add(w.getName());
 					}
 				}
 			}
-
-				cbw.setModel(new DefaultComboBoxModel(wagonNamen.toArray()));
-				wagonNamen.clear();
-			}
-			else
-			{
-				cbw.setModel(new DefaultComboBoxModel<String>(new String[]{}));
-			}
+			_cbw.setModel(new DefaultComboBoxModel(wagonName.toArray()));
+			wagonName.clear();
+		}
+		else
+		{
+			_cbw.setModel(new DefaultComboBoxModel(new String[]{}));
 		}
 	}
 }

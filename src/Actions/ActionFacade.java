@@ -15,8 +15,16 @@ import Model.Train;
 
 public class ActionFacade
 {
+	private RichRail _richRail;
+
+	public ActionFacade()
+	{
+		_richRail = RichRail.getInstance();
+	}
+
 	/**
 	 * Add a train with a name
+	 *
 	 * @param train The name of the train
 	 */
 	public boolean addTrain(String train)
@@ -25,8 +33,7 @@ public class ActionFacade
 			return false;
 
 		//Check if a train with name exists
-		RichRail instance = RichRail.getInstance();
-		for (IItem i : instance.getAllItems())
+		for (IItem i : _richRail.getAllItems())
 		{
 			if (!i.getName().equals(train))
 				continue;
@@ -36,13 +43,14 @@ public class ActionFacade
 		//Create a new train and add to the list
 		RailwayFactory factory = new TrainFactory();
 		IItem t = factory.createTrain(train);
-		instance.addItem(t);
+		_richRail.AddOrUpdateItem(t);
 		return true;
 	}
 
 	/**
 	 * Add a new wagon with a name and seats
-	 * @param name The name of the wagon
+	 *
+	 * @param name  The name of the wagon
 	 * @param seats The amount of seats
 	 */
 	public void addWagon(String name, int seats)
@@ -52,7 +60,7 @@ public class ActionFacade
 
 		TrainFactory factory = new TrainFactory();
 		IItem wagon = factory.createWagon(name, seats);
-		RichRail.getInstance().addItem(wagon);
+		_richRail.AddOrUpdateItem(wagon);
 	}
 
 	public void addWagon(String wagon, String trainName)
@@ -62,78 +70,109 @@ public class ActionFacade
 
 		Train train = GetTrainByName(trainName);
 
-		if(train == null)
+		if (train == null)
 			return;
-		
-		for(IItem i : train.getComponents()) {
-			if(i.getName().equals(wagon)) {
+
+		for (IItem i : _richRail.getAllItems())
+		{
+			if (i.getName().equals(wagon))
+			{
 				System.out.println("Wagon already exists");
 				return;
 			}
 		}
 
 		TrainFactory factory = new TrainFactory();
-		train.addComponents(factory.createWagon(wagon, 10));
+		IItem newItem = factory.createWagon(wagon, 10);
+		newItem.SetParent(train.getId());
+		_richRail.AddOrUpdateItem(newItem);
 	}
 
 	/**
-	 * Remove the wagons of a train
-	 * @param trainName the name of the train
+	 * Remove the items of a parent
+	 *
+	 * @param parentName the name of the train
 	 */
-	public void RemoveWagon(String trainName,String wagonName)
+	public void RemoveItem(String parentName, String childName)
 	{
-		Train train = GetTrainByName(trainName);
+		Train train = GetTrainByName(parentName);
 
-		if(train == null)
+		if (train == null)
 			return;
 
-		train.RemoveItemByName(wagonName);
+		IItem toRemove = null;
+		for(IItem item : _richRail.getAllItems())
+		{
+			if(item.GetParent() != train.getId())
+				continue;
+
+			if(!item.getName().equals(childName))
+				continue;
+			toRemove = item;
+			break;
+		}
+
+		if(toRemove == null)
+			return;
+
+		_richRail.removeItem(toRemove);
 	}
 
 	/**
-	 * Remove all the wagons of a train
-	 * @param trainName the name of the train
+	 * Remove all the child of a parent
+	 *
+	 * @param parentName the name of the train
 	 */
-	public void RemoveAllWagons(String trainName)
+	public void RemoveAllChild(String parentName)
 	{
-		Train train = GetTrainByName(trainName);
+		IItem parent = GetItemByName(parentName);
 
-		if(train == null)
+		if (parent == null)
 			return;
 
-		train.setComponents(new ArrayList<>());
+		for(IItem item : _richRail.getAllItems())
+		{
+			if(item.GetParent() != parent.getId())
+				continue;
+
+			//possible array modified exception
+			_richRail.removeItem(item);
+			break;
+		}
 	}
 
 	/**
 	 * Removes a train with its wagons
+	 *
 	 * @param trainName The name of the train
 	 */
 	public void removeTrain(String trainName)
 	{
 		Train train = GetTrainByName(trainName);
 
-		if(train == null)
+		if (train == null)
 			return;
 
-		RichRail.getInstance().removeItem(train);
+		_richRail.removeItem(train);
 	}
 
 	/**
 	 * Get a train by its name
+	 *
 	 * @param name The name of the train
 	 * @return IItem as a train
 	 */
 	private Train GetTrainByName(String name)
 	{
-		for (IItem item : RichRail.getInstance().getAllItems())
+		for (IItem item : _richRail.getAllItems())
 		{
 			if (!item.getName().equals(name))
 				continue;
 
-			if(!(item instanceof Train))
+			if (!(item instanceof Train))
 				continue;
 
-			return (Train)item;
+			return (Train) item;
 		}
 
 		return null;
@@ -141,12 +180,13 @@ public class ActionFacade
 
 	/**
 	 * Get any item by its name
+	 *
 	 * @param name The name of the item
 	 * @return IItem
 	 */
 	public IItem GetItemByName(String name)
 	{
-		List<IItem> items = RichRail.getInstance().getAllItems();
+		List<IItem> items = _richRail.getAllItems();
 		for (IItem item : items)
 		{
 			if (!item.getName().equals(name))
@@ -159,65 +199,62 @@ public class ActionFacade
 
 	/**
 	 * Remove any item by it's name
+	 *
 	 * @param name The name of the item
 	 */
 	public void Remove(String name)
 	{
 		IItem item = GetItemByName(name);
 
-		if(item == null)
+		if (item == null)
 			return;
 
-		RichRail.getInstance().getAllItems().remove(item);
-	}
-
-	/**
-	 * Assign a wagon to a train by name
-	 * @param trainName Name of the train
-	 * @param wagon The name of the wagon
-	 */
-	public void AssignWagonToTrain(String trainName, String wagon)
-	{
-		Train train = GetTrainByName(trainName);
-
-		if(train == null)
-			return;
-
-		IItem item = GetItemByName(wagon);
-
-		if(item == null)
-			return;
-
-		RemoveItemFromTrain(item);
-		train.addComponents(item);
-		item.SetParent(train.getId());
-
-		RichRail.getInstance().addItem(item);
-	}
-
-	/**
-	 * Removes an item from all the trains
-	 * @param item The item to remove
-	 */
-	private void RemoveItemFromTrain(IItem item)
-	{
-		for(Train train : RichRail.getInstance().GetAllTrains())
+		for(IItem child : _richRail.getAllItems())
 		{
-			train.RemoveItem(item);
+			if(child.GetParent() != child.getId())
+				continue;
+
+			_richRail.removeItem(child);
 		}
+
+		_richRail.removeItem(item);
+	}
+
+	/**
+	 * Assign a item to another item
+	 *
+	 * @param parentName Name of the parent
+	 * @param childName  The name of the child
+	 */
+	public void AssignItemToItem(String parentName, String childName)
+	{
+		IItem parent = GetItemByName(parentName);
+
+		if (parent == null)
+			return;
+
+		IItem child = GetItemByName(childName);
+
+		if (child == null)
+			return;
+
+		child.SetParent(parent.getId());
+		_richRail.AddOrUpdateItem(child);
 	}
 
 	public void updateComboBoxes(JComboBox<String> cbAllTrains, JComboBox<String> cbAllWagons)
 	{
-		List<IItem> items = RichRail.getInstance().getAllItems();
 		List<String> wagonNames = new ArrayList<>();
 
-		for (IItem item : items)
+		for (IItem item : _richRail.getAllItems())
 		{
 			if (item.getName().equals(cbAllTrains.getSelectedItem()))
 			{
-				for (IItem i : ((Train) item).getComponents())
+				for (IItem i : _richRail.getAllItems())
 				{
+					if(i.GetParent() != item.getId())
+						continue;
+
 					wagonNames.add(i.getName());
 				}
 
@@ -225,6 +262,4 @@ public class ActionFacade
 			}
 		}
 	}
-
-
 }

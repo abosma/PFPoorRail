@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -68,37 +67,27 @@ public class ChangeObserver implements Observer
 			drawnItems.add(item);
 
 			Train train = (Train)item;
-			if (train.getComponents().isEmpty())
-				continue;
 
-			int index = 0;
-			for (IItem child : train.getComponents())
+			for (IItem child : items)
 			{
+				if(child.GetParent() != train.getId())
+					continue;
+
 				BufferedImage childPath = getImage(_images.get(child.getClass()));
 
 				if(childPath == null)
 					continue;
 
-				if (train.getComponents().size() - 1 == index++)
-				{
-					JLabel wagonImage = new JLabel(new ImageIcon(childPath));
-					_drawPanel.add(wagonImage, BorderLayout.LINE_END);
-					_drawPanel.add(Box.createRigidArea(new Dimension(75, 0)));
-				}
-				else
-				{
-					JLabel wagonImage = new JLabel(new ImageIcon(childPath));
-					_drawPanel.add(wagonImage, BorderLayout.LINE_END);
-				}
+				JLabel childImage = new JLabel(new ImageIcon(childPath));
+				_drawPanel.add(childImage, BorderLayout.LINE_END);
+
 				drawnItems.add(child);
 			}
+
 		}
 		for (IItem item : items)
 		{
 			if(drawnItems.contains(item))
-				continue;
-
-			if (!(item instanceof Model.Component))
 				continue;
 
 			BufferedImage itemPath = getImage(_images.get(item.getClass()));

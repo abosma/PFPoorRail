@@ -12,40 +12,33 @@ import Core.RichRail;
 
 public class TrainCBObserver implements Observer
 {
-
 	private JComboBox<String> _comboBoxes;
-	private Subject sub;
 
 	public TrainCBObserver(Subject sub, JComboBox<String> comboBoxes)
 	{
-		this.sub = sub;
-		this.sub.registerObserver(this);
+		sub.registerObserver(this);
 		
-		this._comboBoxes = comboBoxes;
-		this.update();
+		_comboBoxes = comboBoxes;
+		update();
 	}
 
 	@Override
 	public void update()
 	{
-		if (RichRail.getInstance().getAllItems() != null)
+		if (RichRail.getInstance().getAllItems() == null)
+			return;
+
+		List<IItem> items = RichRail.getInstance().getAllItems();
+		List<String> names = new ArrayList<>();
+
+		for (IItem i : items)
 		{
-			List<IItem> items = RichRail.getInstance().getAllItems();
-			List<String> names = new ArrayList<String>();
-
-			for (IItem i : items)
-			{
-				if(i instanceof Train){
-					names.add(i.getName());
-				}
-				
-				
-			}
-
-			_comboBoxes.setModel(new DefaultComboBoxModel(names.toArray()));
-			names.clear();
+			if(!(i instanceof Train))
+				continue;
+			names.add(i.getName());
 		}
-	}
-	
 
+		_comboBoxes.setModel(new DefaultComboBoxModel(names.toArray()));
+		names.clear();
+	}
 }

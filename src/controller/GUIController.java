@@ -1,7 +1,6 @@
 package controller;
 
 import Actions.ActionFacade;
-import Actions.CloseAction;
 import Observers.ObserverController;
 
 import java.awt.BorderLayout;
@@ -42,8 +41,6 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			this.setMainPanel(drawPanel);
 			this.setTrainPanel(trainPanel);
 			this.setComponentPanel(componentPanel);
-
-			JFrame.getFrames()[0].addWindowListener(new CloseAction());
 
 			pack();
 			setSize(800, 800);
@@ -105,7 +102,6 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 
 	private void setComponentPanel(JPanel componentPanel)
 	{
-
 		componentPanel.setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 
 		JTextField tfNewWagon = new JTextField(20);
@@ -123,7 +119,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 		_wagonSelect.addActionListener(a -> ac.updateComboBoxes(_trainSelect, _wagonSelect));
 
 		JButton deleteWagon = createButton(1, 3, 1, 1, componentPanel, "Delete Wagon");
-		deleteWagon.addActionListener(a -> ac.RemoveWagon((String) _trainSelect.getSelectedItem(), (String) _wagonSelect.getSelectedItem()));
+		deleteWagon.addActionListener(a -> ac.RemoveItem((String) _trainSelect.getSelectedItem(), (String) _wagonSelect.getSelectedItem()));
 	}
 
 	private JButton createButton(int x, int y, int width, int height, JPanel panel, String txt)

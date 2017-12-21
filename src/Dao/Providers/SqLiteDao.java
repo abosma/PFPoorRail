@@ -22,7 +22,7 @@ public class SqLiteDao implements IDao
     @Override
     public List<IItem> GetAll()
     {
-        String query = "SELECT Id, Name, Type FROM Items;";
+        String query = "SELECT Id, Name, Type, ref_Parent FROM Items;";
 
         //Get all the items
         List<Map<String,Object>> data = _connection.Query(query);
@@ -30,6 +30,7 @@ public class SqLiteDao implements IDao
         for(Map<String,Object> item : data)
         {
             int id = (int)item.get("Id");
+            int parentId = (int)item.get("ref_Parent");
             String name = (String)item.get("Name");
             String type = (String)item.get("Type");
 
@@ -43,6 +44,7 @@ public class SqLiteDao implements IDao
 
                 instance.SetId(id);
                 instance.SetName(name);
+                instance.SetParent(parentId);
                 items.add(instance);
             }
             catch (Exception ex)
@@ -68,7 +70,7 @@ public class SqLiteDao implements IDao
 
         String sql = "INSERT INTO Items (Name,Type, ref_Parent) VALUES (?,?, ?);";
         _connection.NonQuery(sql,item.getName(),item.getClass(), item.GetParent());
-        int id = _connection.Scalar("select last_insert_rowid()");
+        int id = _connection.Scalar("select max(Id) FROM Items");
 
         return id;
     }
