@@ -33,6 +33,8 @@ public class ChangeObserver implements Observer
 		subject.registerObserver(this);
 		
 		_drawPanel = drawPanel;
+		
+		this.update();
 	}
 
 	@Override

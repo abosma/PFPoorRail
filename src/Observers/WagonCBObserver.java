@@ -24,6 +24,7 @@ public class WagonCBObserver implements Observer
 		
 		this.cbt = cbt;
 		this.cbw = cbw;
+		this.update();
 	}
 
 	@Override

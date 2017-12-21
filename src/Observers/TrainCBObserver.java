@@ -21,6 +21,7 @@ public class TrainCBObserver implements Observer
 		this.sub.registerObserver(this);
 		
 		this._comboBoxes = comboBoxes;
+		this.update();
 	}
 
 	@Override

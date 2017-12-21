@@ -49,7 +49,7 @@ public class GUIController extends javax.swing.JFrame implements ActionListener
 			setSize(800, 800);
 
 			new ObserverController(drawPanel, _trainSelect, _wagonSelect);
-
+		
 		}
 		catch (Exception e)
 		{
