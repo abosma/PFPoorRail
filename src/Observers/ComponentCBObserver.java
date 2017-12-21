@@ -41,6 +41,8 @@ public class ComponentCBObserver implements Observer
 			{
 				for (IItem i : items)
 				{
+					if(i instanceof Train){
+					
 					if (i.getName().equals(selectedTrain))
 					{
 						for (IItem w : ((Train) i).getComponents())
@@ -49,6 +51,7 @@ public class ComponentCBObserver implements Observer
 						}
 					}
 				}
+			}
 
 				cbw.setModel(new DefaultComboBoxModel(wagonNamen.toArray()));
 				wagonNamen.clear();

@@ -7,6 +7,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 
 import Model.IItem;
+import Model.Train;
 import Core.RichRail;
 
 public class TrainCBObserver implements Observer
@@ -34,7 +35,11 @@ public class TrainCBObserver implements Observer
 
 			for (IItem i : items)
 			{
-				names.add(i.getName());
+				if(i instanceof Train){
+					names.add(i.getName());
+				}
+				
+				
 			}
 
 			_comboBoxes.setModel(new DefaultComboBoxModel(names.toArray()));
