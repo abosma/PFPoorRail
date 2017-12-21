@@ -65,7 +65,7 @@ public class ActionFacade
 		if(train == null)
 			return;
 		
-		for(IItem i : train.getWagons()) {
+		for(IItem i : train.getComponents()) {
 			if(i.getName().equals(wagon)) {
 				System.out.println("Wagon already exists");
 				return;
@@ -73,7 +73,7 @@ public class ActionFacade
 		}
 
 		TrainFactory factory = new TrainFactory();
-		train.addWagon(factory.createWagon(wagon, 10));
+		train.addComponents(factory.createWagon(wagon, 10));
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class ActionFacade
 		if(train == null)
 			return;
 
-		train.setWagons(new ArrayList<>());
+		train.setComponents(new ArrayList<>());
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class ActionFacade
 			return;
 
 		RemoveItemFromTrain(item);
-		train.addWagon(item);
+		train.addComponents(item);
 		item.SetParent(train.getId());
 
 		RichRail.getInstance().addItem(item);
@@ -216,7 +216,7 @@ public class ActionFacade
 		{
 			if (item.getName().equals(cbAllTrains.getSelectedItem()))
 			{
-				for (IItem i : ((Train) item).getWagons())
+				for (IItem i : ((Train) item).getComponents())
 				{
 					wagonNames.add(i.getName());
 				}

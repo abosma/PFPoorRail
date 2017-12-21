@@ -68,18 +68,18 @@ public class ChangeObserver implements Observer
 			drawnItems.add(item);
 
 			Train train = (Train)item;
-			if (train.getWagons().isEmpty())
+			if (train.getComponents().isEmpty())
 				continue;
 
 			int index = 0;
-			for (IItem child : train.getWagons())
+			for (IItem child : train.getComponents())
 			{
 				BufferedImage childPath = getImage(_images.get(child.getClass()));
 
 				if(childPath == null)
 					continue;
 
-				if (train.getWagons().size() - 1 == index++)
+				if (train.getComponents().size() - 1 == index++)
 				{
 					JLabel wagonImage = new JLabel(new ImageIcon(childPath));
 					_drawPanel.add(wagonImage, BorderLayout.LINE_END);

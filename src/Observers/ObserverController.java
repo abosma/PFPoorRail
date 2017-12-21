@@ -11,6 +11,6 @@ public class ObserverController
 	{
 		new ChangeObserver(RichRail.getInstance(), drawPanel);
 		new TrainCBObserver(RichRail.getInstance(), _trainSelect);
-		new WagonCBObserver(RichRail.getInstance(), _trainSelect, _wagonSelect);
+		new ComponentCBObserver(RichRail.getInstance(), _trainSelect, _wagonSelect);
 	}
 }

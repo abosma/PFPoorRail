@@ -8,7 +8,7 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class Train implements IItem
 {
-	private List<IItem> allWagons = new ArrayList<>();
+	private List<IItem> allComponents = new ArrayList<>();
 	private int _id;
 	private String _name;
 
@@ -58,32 +58,32 @@ public class Train implements IItem
 
 	}
 
-	public List<IItem> getWagons()
+	public List<IItem> getComponents()
 	{
-		return allWagons;
+		return allComponents;
 	}
 
-	public void setWagons(List<IItem> wag)
+	public void setComponents(List<IItem> wag)
 	{
-		allWagons = wag;
+		allComponents = wag;
 		RichRail.getInstance().notifyObservers();
 	}
 
-	public void addWagon(IItem w)
+	public void addComponents(IItem w)
 	{
-		allWagons.add(w);
+		allComponents.add(w);
 		RichRail.getInstance().notifyObservers();
 	}
 
 	public void RemoveItem(IItem item)
 	{
-		allWagons.remove(item);
+		allComponents.remove(item);
 	}
 
 	public void RemoveItemByName(String name)
 	{
 		IItem toRemove= null;
-		for (IItem item : allWagons)
+		for (IItem item : allComponents)
 		{
 			if (!item.getName().equals(name))
 				continue;

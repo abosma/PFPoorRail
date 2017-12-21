@@ -10,14 +10,14 @@ import Model.IItem;
 import Core.RichRail;
 import Model.Train;
 
-public class WagonCBObserver implements Observer
+public class ComponentCBObserver implements Observer
 {
 
 	private JComboBox<String> cbt;
 	private JComboBox<String> cbw;
 	private Subject sub;
 
-	public WagonCBObserver(Subject sub, JComboBox<String> cbt, JComboBox<String> cbw)
+	public ComponentCBObserver(Subject sub, JComboBox<String> cbt, JComboBox<String> cbw)
 	{
 		this.sub = sub;
 		this.sub.registerObserver(this);
@@ -43,7 +43,7 @@ public class WagonCBObserver implements Observer
 				{
 					if (i.getName().equals(selectedTrain))
 					{
-						for (IItem w : ((Train) i).getWagons())
+						for (IItem w : ((Train) i).getComponents())
 						{
 							wagonNamen.add(w.getName());
 						}
